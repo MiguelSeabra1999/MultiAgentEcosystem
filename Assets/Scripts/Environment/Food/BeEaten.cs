@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeEaten : MonoBehaviour
 {
     public float nutricionalValue = 10;
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         State otherState = other.gameObject.GetComponent<State>();
         if(otherState.hunger < 100)
         {

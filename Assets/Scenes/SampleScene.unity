@@ -419,6 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 673356470}
   - component: {fileID: 673356471}
+  - component: {fileID: 673356472}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -464,6 +465,24 @@ MonoBehaviour:
   maxY: 120
   spawnChance: 0.5
   spawnChanceFrequency: 0.5
+--- !u!114 &673356472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673356469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f257d7617b30fe5479edd698e828c941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 266069031307240845, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+  minX: -120
+  minY: -120
+  maxX: 120
+  maxY: 120
+  NumberAgents: 20
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

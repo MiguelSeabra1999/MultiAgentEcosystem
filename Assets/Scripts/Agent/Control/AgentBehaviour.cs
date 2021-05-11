@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(Genome))]
 [RequireComponent(typeof(Smell))]
+
+
 public class AgentBehaviour : MonoBehaviour
 {
 
