@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4068807974232156745}
   - component: {fileID: 7959711662143659309}
   - component: {fileID: 4719063023130372448}
+  - component: {fileID: 1674038592080460466}
   m_Layer: 7
   m_Name: Agent
   m_TagString: Untagged
@@ -140,7 +141,7 @@ MonoBehaviour:
   vitality: 10
   starvingDamage: 0.1
   wanderRate: 0.001
-  senseRadius: 30
+  senseRadius: 60
   mutationProbability: 1
   speed_interval: 0500000014000000
   vitality_interval:
@@ -188,6 +189,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateRate: 0.1
   smellingFood: 0
+--- !u!114 &1674038592080460466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266069031307240845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a107b204d880ef94cb66c15aa7dfbff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRate: 0.1
+  feelingAgent: 0
 --- !u!1 &2101800742317487622
 GameObject:
   m_ObjectHideFlags: 0

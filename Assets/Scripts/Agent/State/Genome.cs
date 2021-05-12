@@ -9,7 +9,9 @@ public class Genome : MonoBehaviour
     
     [HideInInspector] public float speed = 20;
     [HideInInspector] public float vitality = 20;
+    [HideInInspector] public float mood = 20;
     [HideInInspector] public float starvingDamage = 0.1f;
+    [HideInInspector] public float angryDamage = 0.1f;
     [HideInInspector] public float wanderRate = 0.001f;
     [HideInInspector] public float senseRadius = 30f;
     [HideInInspector] public float mutationProbability = 1f;
@@ -18,6 +20,8 @@ public class Genome : MonoBehaviour
     //Intervals
     public int[] speed_interval = {5, 20};
     public float[] vitality_interval = {5f, 20f};
+    public float[] mood_interval = { 5f, 20f };
+    public float[] angryDamage_interval = { 0.05f, 0.1f };
     public float[] starvingDamage_interval = {0.05f, 0.1f};
     public float[] wanderRate_interval = {0.0001f, 0.001f};
     public float[] senseRadius_interval = {40f, 100f};
@@ -38,8 +42,14 @@ public class Genome : MonoBehaviour
             
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             vitality = Random.Range(vitality_interval[0], vitality_interval[1]);
-        
-        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+
+        if (Random.Range(0.0f, 1.0f) <= mutationProbability)
+            mood = Random.Range(mood_interval[0], mood_interval[1]);
+
+        if (Random.Range(0.0f, 1.0f) <= mutationProbability)
+            angryDamage = Random.Range(angryDamage_interval[0], angryDamage_interval[1]);
+
+        if (Random.Range(0.0f, 1.0f) <= mutationProbability)
             starvingDamage = Random.Range(starvingDamage_interval[0], starvingDamage_interval[1]);
         
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
