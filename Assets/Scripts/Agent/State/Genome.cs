@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class Genome : MonoBehaviour
     [HideInInspector] public float wanderRate = 0.001f;
     [HideInInspector] public float senseRadius = 30f;
     [HideInInspector] public float mutationProbability = 1f;
-    
+
+    [HideInInspector] public Color color = new Color(0,0,0);
 
     //Intervals
     public int[] speed_interval = {5, 20};
@@ -22,14 +24,16 @@ public class Genome : MonoBehaviour
     public float[] wanderRate_interval = {0.0001f, 0.001f};
     public float[] senseRadius_interval = {40f, 100f};
     public float[] mutationProbability_interval = {0.05f, 1f};
-
-    public Color color;
+    public Color[] possibleColors = new Color[3];
+    public int attractiveness = 0;
 
     private RendererFXInterface rendererFXInterface;
+
     private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();
-        rendererFXInterface.SetColor(color);
         GenomeWithMutations();
+        rendererFXInterface.SetColor(color);
+        
     }
 
     public void GenomeWithMutations() {
@@ -50,6 +54,9 @@ public class Genome : MonoBehaviour
         
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             mutationProbability = Random.Range(mutationProbability_interval[0], mutationProbability_interval[1]);
+
+        attractiveness = Random.Range(0, 3);
+        color = possibleColors[attractiveness];
     }
 
 

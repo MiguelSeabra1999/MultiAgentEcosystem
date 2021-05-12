@@ -464,7 +464,7 @@ MonoBehaviour:
   maxX: 120
   maxY: 120
   spawnChance: 0.7
-  spawnChanceFrequency: 0.7
+  spawnChanceFrequency: 0.3
 --- !u!114 &673356472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,10 +1047,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Agent
       objectReference: {fileID: 0}
-    - target: {fileID: 266069031307240845, guid: 7a132c35d8286614289307e670a928d1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1276623428575634886, guid: 7a132c35d8286614289307e670a928d1, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1094,14 +1090,6 @@ PrefabInstance:
     - target: {fileID: 1276623428575634886, guid: 7a132c35d8286614289307e670a928d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4068807974232156745, guid: 7a132c35d8286614289307e670a928d1, type: 3}
-      propertyPath: senseRadius
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8391037746584160529, guid: 7a132c35d8286614289307e670a928d1, type: 3}
-      propertyPath: wanderRate
-      value: 0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 8590131121725685085, guid: 7a132c35d8286614289307e670a928d1, type: 3}
       propertyPath: m_Materials.Array.data[0]

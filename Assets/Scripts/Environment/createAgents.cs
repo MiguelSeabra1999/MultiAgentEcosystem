@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class createAgents : MonoBehaviour
+public class CreateAgents : MonoBehaviour
 {
     public GameObject agentPrefab;
     public float minX;
