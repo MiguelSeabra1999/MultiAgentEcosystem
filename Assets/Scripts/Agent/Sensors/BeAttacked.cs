@@ -17,7 +17,7 @@ public class BeAttacked : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
 
         State otherState = other.gameObject.GetComponent<State>();

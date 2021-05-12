@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ef6b4f4fcd0f049b3686f6162aef7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayEvents: {fileID: 11400000, guid: ba028adf66decf14984f034439566392, type: 2}
 --- !u!135 &964064541948421077
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -139,14 +140,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   vitality: 10
+  mood: 20
   starvingDamage: 0.1
+  angryDamage: 0.1
   wanderRate: 0.001
   senseRadius: 60
   mutationProbability: 1
+  color: {r: 0.3882353, g: 0.7254902, b: 0.23529412, a: 1}
   speed_interval: 0500000014000000
   vitality_interval:
   - 5
   - 20
+  mood_interval:
+  - 5
+  - 20
+  angryDamage_interval:
+  - 0.05
+  - 0.1
   starvingDamage_interval:
   - 0.05
   - 0.1
@@ -159,7 +169,11 @@ MonoBehaviour:
   mutationProbability_interval:
   - 0.05
   - 1
-  color: {r: 0.3882353, g: 0.7254902, b: 0.23529412, a: 1}
+  possibleColors:
+  - {r: 0.15977213, g: 0.8301887, b: 0.46727252, a: 0}
+  - {r: 0.9245283, g: 0.3174795, b: 0.81379145, a: 0}
+  - {r: 0.8773585, g: 0.80797863, b: 0.21851191, a: 0}
+  attractiveness: 0
 --- !u!114 &7959711662143659309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consistentHungerDrainRate: 0.01
+  consistentPeaceDrainRate: 0.01
   hp: 0
   hunger: 100
+  peace: 100
 --- !u!114 &4719063023130372448
 MonoBehaviour:
   m_ObjectHideFlags: 0

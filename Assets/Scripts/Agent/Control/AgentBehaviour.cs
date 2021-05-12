@@ -16,6 +16,7 @@ public class AgentBehaviour : MonoBehaviour
     private Smell smell;
     private Feel feel;
     private float timeSinceLastWanderShift;
+    private bool firstFrame = true;
     private void Awake() {
         moveActuator = GetComponent<MoveActuator>();
         state = GetComponent<State>();
@@ -28,28 +29,30 @@ public class AgentBehaviour : MonoBehaviour
     }
 
     private void Update() {
-        if(!smell.smellingFood && !feel.feelingAgent)
+        if(!smell.smellingFood)
             Wander();
     }
 
     private void Wander()
     {
   
-        if(Random.Range(0f,1f) < genome.wanderRate * (Time.time - timeSinceLastWanderShift))
+        if(firstFrame || Random.Range(0f,1f) < genome.wanderRate * (Time.time - timeSinceLastWanderShift))
         {
             timeSinceLastWanderShift = Time.time;
             moveActuator.SetRandomMovement();
+            firstFrame= false;
         }
         
     }
 
     private void FeelAgentHandler(Vector3 pos)
-    {
-        Vector3 dir3D = (pos - transform.position).normalized;
+    {   if(!smell.smellingFood) {
+            Vector3 dir3D = (pos - transform.position).normalized;
 
-        Vector2 dir2D = new Vector2(dir3D.x, dir3D.z);
-        Debug.Log(dir2D);
-        moveActuator.SetMovement(dir2D);
+            Vector2 dir2D = new Vector2(dir3D.x, dir3D.z);
+            Debug.Log(dir2D);
+            moveActuator.SetMovement(dir2D);
+        }
     }
 
     private void SmellFoodHandler(Vector3 pos)
@@ -57,17 +60,9 @@ public class AgentBehaviour : MonoBehaviour
         Vector3 dir3D = (pos-transform.position).normalized;
         
         Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
-        Debug.Log(dir2D);
-        if(state.peace > 0)
-            moveActuator.SetMovement(dir2D);
-    }
-
- 
-
- 
-    //    Debug.Log(dir2D);
         moveActuator.SetMovement(dir2D);
     }
+
     void OnDestroy()
     {
         gameplayEvents.InvokeAgentDiedEvent();

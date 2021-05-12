@@ -8,7 +8,7 @@ public class Genome : MonoBehaviour
 {
     //Max values 
     
-    [HideInInspector] public float speed = 20;
+     public float speed = 20;
     [HideInInspector] public float vitality = 20;
     [HideInInspector] public float mood = 20;
     [HideInInspector] public float starvingDamage = 0.1f;
