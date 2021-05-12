@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class DaysController : MonoBehaviour
 {
+    public GameplayEvents gameplayEvents;
     public Light DirectionalLight;
     public LightingPreset Preset;
-    private CreateAgents createAgents;
-    private float daysCounter = 0;
+    public float daysCounter = 0;
     private float time = 0;
     [SerializeField, Range(0, 24)] private float TimeOfDay;
 
    void Awake() {
-       createAgents = GetComponent<CreateAgents>();
+       
    }
        private void Update()
     {
@@ -24,8 +24,12 @@ public class DaysController : MonoBehaviour
         {
             //(Replace with a reference to the game time)
             TimeOfDay += Time.deltaTime;
-            daysCounter += TimeOfDay / 24f;
+            if(TimeOfDay >= 24f) {
+                daysCounter++;
+                gameplayEvents.InvokeSaveData();
+            }
             TimeOfDay %= 24; //Modulus to ensure always between 0-24
+                daysCounter = Mathf.Floor(daysCounter) + TimeOfDay / 24f;
             UpdateLighting(TimeOfDay / 24f);
         }
         else

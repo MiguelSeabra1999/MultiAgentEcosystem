@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class AgentBehaviour : MonoBehaviour
 {
-
+    public GameplayEvents gameplayEvents;
     private MoveActuator moveActuator;
     private State state;
     private Genome genome;
@@ -45,9 +45,12 @@ public class AgentBehaviour : MonoBehaviour
         Vector3 dir3D = (pos-transform.position).normalized;
         
         Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
-        Debug.Log(dir2D);
+    //    Debug.Log(dir2D);
         moveActuator.SetMovement(dir2D);
     }
-
+    void OnDestroy()
+    {
+        gameplayEvents.InvokeAgentDiedEvent();
+    }
     
 }
