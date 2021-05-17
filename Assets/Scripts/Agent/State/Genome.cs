@@ -7,7 +7,6 @@ using UnityEngine;
 public class Genome : MonoBehaviour
 {
     //Max values 
-    
      public float speed = 20;
     [HideInInspector] public float vitality = 20;
     [HideInInspector] public float mood = 20;

@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(Genome))]
 [RequireComponent(typeof(Smell))]
+[RequireComponent(typeof(AgentDeliberation))]
 
 
 public class AgentBehaviour : MonoBehaviour
@@ -15,28 +18,40 @@ public class AgentBehaviour : MonoBehaviour
     private Genome genome;
     private Smell smell;
     private Feel feel;
+    private AgentDeliberation agentDeliberation;
     private float timeSinceLastWanderShift;
     private bool firstFrame = true;
+
+    private GameObject partner = null;
+    private bool followingPartner = false;
     private void Awake() {
         moveActuator = GetComponent<MoveActuator>();
         state = GetComponent<State>();
         genome = GetComponent<Genome>();
         smell = GetComponent<Smell>();
         feel = GetComponent<Feel>();
+        agentDeliberation = GetComponent<AgentDeliberation>();
 
         smell.smelledFoodEvent += SmellFoodHandler;
         feel.feltAgentEvent += FeelAgentHandler;
     }
 
     private void Update() {
-        if(!smell.smellingFood)
+        if(!agentDeliberation.IsSearchingPartner(state.hunger)) {
+            partner = null;
+            followingPartner = false;
+        }
+        if(!smell.smellingFood && !feel.feelingAgent && !followingPartner)
             Wander();
+        if(followingPartner) {
+            FollowPartner();
+        }  
     }
 
     private void Wander()
     {
   
-        if(firstFrame || Random.Range(0f,1f) < genome.wanderRate * (Time.time - timeSinceLastWanderShift))
+        if(firstFrame || UnityEngine.Random.Range(0f,1f) < genome.wanderRate * (Time.time - timeSinceLastWanderShift))
         {
             timeSinceLastWanderShift = Time.time;
             moveActuator.SetRandomMovement();
@@ -45,22 +60,31 @@ public class AgentBehaviour : MonoBehaviour
         
     }
 
-    private void FeelAgentHandler(Vector3 pos)
-    {   if(!smell.smellingFood) {
-            Vector3 dir3D = (pos - transform.position).normalized;
-
-            Vector2 dir2D = new Vector2(dir3D.x, dir3D.z);
-            Debug.Log(dir2D);
-            moveActuator.SetMovement(dir2D);
+    private void FeelAgentHandler(GameObject go)
+    {   if(agentDeliberation.IsSearchingPartner(state.hunger) && !followingPartner) {
+            partner = go;
+            followingPartner = true;
         }
     }
 
     private void SmellFoodHandler(Vector3 pos)
     {
-        Vector3 dir3D = (pos-transform.position).normalized;
-        
-        Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
-        moveActuator.SetMovement(dir2D);
+        if(agentDeliberation.IsSearchingFood(state.hunger)) {
+            Vector3 dir3D = (pos-transform.position).normalized;
+            UnityEngine.Debug.Log("going food");
+            Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
+            moveActuator.SetMovement(dir2D);
+        }
+    }
+
+    private void FollowPartner()
+    {
+        if(partner != null) {
+            Vector3 dir3D = (partner.transform.position - transform.position).normalized;
+            UnityEngine.Debug.Log("going partner:" + dir3D);
+            Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
+            moveActuator.SetMovement(dir2D);
+        }
     }
 
     void OnDestroy()

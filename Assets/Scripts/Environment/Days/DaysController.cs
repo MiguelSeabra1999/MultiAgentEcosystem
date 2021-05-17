@@ -9,7 +9,6 @@ public class DaysController : MonoBehaviour
     public Light DirectionalLight;
     public LightingPreset Preset;
     public float daysCounter = 0;
-    private float time = 0;
     [SerializeField, Range(0, 24)] private float TimeOfDay;
 
    void Awake() {

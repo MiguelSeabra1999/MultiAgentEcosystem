@@ -8,7 +8,7 @@ public class Feel : MonoBehaviour
     public float updateRate = 0.1f;
     private Genome genome;
     public bool feelingAgent = false;
-    [HideInInspector] public event UnityAction<Vector3> feltAgentEvent;
+    [HideInInspector] public event UnityAction<GameObject> feltAgentEvent;
 
     void Start()
     {
@@ -19,26 +19,28 @@ public class Feel : MonoBehaviour
     private IEnumerator FeelRoutine()
     {
         float minDist = Mathf.Infinity;
-        Vector3 nearestAgentPos = Vector3.zero;
+        GameObject nearestAgent = null;
 
         while (true)
         {
             // Play a noise if an object is within the sphere's radius.
             Collider[] agents = Physics.OverlapSphere(transform.position, genome.senseRadius, LayerMask.GetMask("Agent"));
-            if (agents.Length > 0)
+            if (agents.Length > 1)
             {
                 foreach (Collider coll in agents)
                 {
-                    float dist = (coll.transform.position - transform.position).magnitude;
-                    if (dist < minDist)
-                    {
-                        minDist = dist;
-                        nearestAgentPos = coll.transform.position;
+                    if(coll.gameObject != this.gameObject) {
+                        float dist = (coll.transform.position - transform.position).magnitude;
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            nearestAgent = coll.gameObject;
+                        }
                     }
                 }
 
                 if (feltAgentEvent != null)
-                    feltAgentEvent.Invoke(nearestAgentPos);
+                    feltAgentEvent.Invoke(nearestAgent);
                 feelingAgent = true;
             }
             else
