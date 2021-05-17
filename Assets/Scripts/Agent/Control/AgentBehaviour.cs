@@ -37,7 +37,7 @@ public class AgentBehaviour : MonoBehaviour
     }
 
     private void Update() {
-        if(!agentDeliberation.IsSearchingPartner(state.hunger)) {
+        if(!agentDeliberation.IsSearchingPartner(state.hunger, genome.threshold)) {
             partner = null;
             followingPartner = false;
         }
@@ -61,15 +61,20 @@ public class AgentBehaviour : MonoBehaviour
     }
 
     private void FeelAgentHandler(GameObject go)
-    {   if(agentDeliberation.IsSearchingPartner(state.hunger) && !followingPartner) {
-            partner = go;
-            followingPartner = true;
+    {   if(agentDeliberation.IsSearchingPartner(state.hunger, genome.threshold) && !followingPartner) {
+            float dist = Vector3.Distance(go.transform.position, transform.position);
+            UnityEngine.Debug.Log("prob: " + agentDeliberation.ProbabilityFollowToProcreate(state.hunger, dist, genome.threshold));
+            if(UnityEngine.Random.Range(0f, 1f) <= agentDeliberation.ProbabilityFollowToProcreate(state.hunger, dist, genome.threshold)) {
+                UnityEngine.Debug.Log("accepted");
+                partner = go;
+                followingPartner = true;
+            }
         }
     }
 
     private void SmellFoodHandler(Vector3 pos)
     {
-        if(agentDeliberation.IsSearchingFood(state.hunger)) {
+        if(agentDeliberation.IsSearchingFood(state.hunger, genome.threshold)) {
             Vector3 dir3D = (pos-transform.position).normalized;
             UnityEngine.Debug.Log("going food");
             Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
