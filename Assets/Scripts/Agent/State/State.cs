@@ -12,16 +12,19 @@ public class State : MonoBehaviour
     public float hp;
     public float hunger = 100;
     public float peace = 100;
+    [HideInInspector]public bool blocked = false;
     private Genome genome;
     private Animator animator;
     private Feel feel;
     private RendererFXInterface rendererFXInterface;
+    private  MoveActuator moveActuator;
 
     private void Awake() {
         genome = GetComponent<Genome>();
         feel = GetComponent<Feel>();
         rendererFXInterface = GetComponent<RendererFXInterface>();
         animator = GetComponentInChildren<Animator>();
+        moveActuator = GetComponent<MoveActuator>();
         hp = genome.vitality;
     }
 
@@ -60,6 +63,7 @@ public class State : MonoBehaviour
 
     private void Attack()
     {
+        
         animator.SetTrigger("Attack");   
 
     }
@@ -91,5 +95,16 @@ public class State : MonoBehaviour
         peace += attackValue;
         if (peace > 100)
             peace = 100;
+    }
+
+    public void SetBlock(bool state)
+    {
+        blocked = state;
+        if(state)
+        {
+            moveActuator.SetMovement(Vector2.zero);
+        }
+
+
     }
 }
