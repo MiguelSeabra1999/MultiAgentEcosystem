@@ -75,8 +75,8 @@ public class AgentBehaviour : MonoBehaviour
 
         else if((!smell.smellingFood || !agentDeliberation.IsSearchingFood()) && !followingAgentToAttack && !followingPartner)
             Wander();
-        
 
+        
     }
 
     private void Wander()
