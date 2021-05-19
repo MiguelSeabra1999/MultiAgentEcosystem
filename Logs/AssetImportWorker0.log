@@ -503,3 +503,30 @@ Received Import Request.
 Start importing Assets/Scenes/small.unity using Guid(73f3083a71785b840b76bbf6fcc08b7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87f8de42d524b7a5051bb046385281e0') in 0.013729 seconds
   Import took 0.017026 seconds .
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000896 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.969 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.30 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1240 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 95.8 MB.
+System memory in use after: 95.8 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1813.
+Total: 3.303600 ms (FindLiveObjects: 0.412400 ms CreateObjectMapping: 0.129900 ms MarkObjects: 2.639800 ms  DeleteObjects: 0.118800 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
