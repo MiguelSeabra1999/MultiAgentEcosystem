@@ -26,7 +26,7 @@ public class Genome : MonoBehaviour
     public float[] angryDamage_interval = { 0.05f, 0.1f };
     public float[] starvingDamage_interval = {0.05f, 0.1f};
     public float[] wanderRate_interval = {0.0001f, 0.001f};
-    public float[] senseRadius_interval = {40f, 100f};
+    public float[] senseRadius_interval = {10f, 50f};
     public float[] strength_interval = {0.05f, 1f};
     public float[] threshold_interval = {40f, 90f};
     public Color[] possibleColors = new Color[3];
@@ -130,7 +130,8 @@ public class Genome : MonoBehaviour
             threshold = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.threshold : go_2.threshold;
 
         attractiveness = Random.Range(0, 3);
-        color = possibleColors[attractiveness];
+        color = Color.red;
+         UnityEngine.Debug.Log("Babyyyyyyyyyyyyyyyyy");
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class BeEaten : MonoBehaviour
 {
-    public float nutricionalValue = 10;
+    private float nutricionalValue = 20;
     private void OnTriggerStay(Collider other) {
         State otherState = other.gameObject.GetComponent<State>();
         if(otherState.hunger < 100)
