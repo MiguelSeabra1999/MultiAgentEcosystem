@@ -12,7 +12,7 @@ public class State : MonoBehaviour
     public float hp;
     public float hunger = 100;
     public float peace = 100;
-    [HideInInspector]public bool blocked = false;
+    public bool blocked = false;
     private Genome genome;
     private Animator animator;
     private Feel feel;
@@ -26,6 +26,10 @@ public class State : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         moveActuator = GetComponent<MoveActuator>();
         hp = genome.vitality;
+    }
+    void Start()
+    {
+        blocked = false;
     }
 
     private void FixedUpdate() {
