@@ -50,6 +50,7 @@ public class AgentBehaviour : MonoBehaviour
         if(followingPartner) {
             FollowPartner();
         }  
+        
     }
 
     private void Wander()

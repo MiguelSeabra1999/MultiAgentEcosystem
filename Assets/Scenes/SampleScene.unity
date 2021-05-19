@@ -479,12 +479,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayEvents: {fileID: 11400000, guid: ba028adf66decf14984f034439566392, type: 2}
-  agentPrefab: {fileID: 266069031307240845, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+  agentPrefab: {fileID: 1338880373}
   minX: -120
   minY: -120
   maxX: 120
   maxY: 120
-  NumberAgents: 10
+  NumberAgents: 50
 --- !u!114 &673356474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,6 +1055,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231083837}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1338880373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 266069031307240845, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+  m_PrefabInstance: {fileID: 6454246002014444448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1425482018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1173,18 @@ PrefabInstance:
     - target: {fileID: 1276623428575634886, guid: 7a132c35d8286614289307e670a928d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068807974232156745, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+      propertyPath: possibleColors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068807974232156745, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+      propertyPath: possibleColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068807974232156745, guid: 7a132c35d8286614289307e670a928d1, type: 3}
+      propertyPath: possibleColors.Array.data[2].a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8590131121725685085, guid: 7a132c35d8286614289307e670a928d1, type: 3}
       propertyPath: m_Materials.Array.data[0]

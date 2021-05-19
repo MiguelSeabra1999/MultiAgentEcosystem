@@ -529,3 +529,54 @@ System memory in use after: 94.8 MB.
 Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1800.
 Total: 3.537800 ms (FindLiveObjects: 0.784900 ms CreateObjectMapping: 0.115000 ms MarkObjects: 2.526200 ms  DeleteObjects: 0.109300 ms)
 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001450 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.24 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.006 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1230 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 94.7 MB.
+System memory in use after: 94.8 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1803.
+Total: 3.039800 ms (FindLiveObjects: 0.256200 ms CreateObjectMapping: 0.055800 ms MarkObjects: 2.660300 ms  DeleteObjects: 0.066200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 8037.080053 seconds.
+  path: Assets/Prefabs/Agent.prefab
+  artifactKey: Guid(7a132c35d8286614289307e670a928d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Agent.prefab using Guid(7a132c35d8286614289307e670a928d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d2f82d17caa352a28da9efc31490754') in 0.087329 seconds
+  Import took 0.090981 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.691352 seconds.
+  path: Assets/Scripts/Agent/Control/AgentBehaviour.cs
+  artifactKey: Guid(93ef6b4f4fcd0f049b3686f6162aef7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Agent/Control/AgentBehaviour.cs using Guid(93ef6b4f4fcd0f049b3686f6162aef7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae12db470df565862b19ce1cd8ce56b0') in 0.008443 seconds
+  Import took 0.010702 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.028294 seconds.
+  path: Assets/Scripts/Agent/Control/AgentBehaviour.cs
+  artifactKey: Guid(93ef6b4f4fcd0f049b3686f6162aef7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Agent/Control/AgentBehaviour.cs using Guid(93ef6b4f4fcd0f049b3686f6162aef7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae12db470df565862b19ce1cd8ce56b0') in 0.004341 seconds
+  Import took 0.007548 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
