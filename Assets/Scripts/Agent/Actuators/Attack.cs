@@ -9,6 +9,7 @@ public class Attack : MonoBehaviour
     private Animator animator;
 
     private float attackValue = 100;
+    private float attackDelay = 5f;
 
     void Awake()
     {
@@ -20,6 +21,8 @@ public class Attack : MonoBehaviour
 
     public void AttackAgent(GameObject go)
     {
+        //Invoke("AttackCooldown", attackDelay);
+
         State otherState = go.GetComponent<State>();
         
         animator.SetTrigger("Attack");
@@ -34,5 +37,11 @@ public class Attack : MonoBehaviour
         else {
             UnityEngine.Debug.Log("Attacked");
         }        
+    }
+
+    private void AttackCooldown()
+    {
+       // canAttack = true;
+    //    state.SetBlock(false);
     }
 }

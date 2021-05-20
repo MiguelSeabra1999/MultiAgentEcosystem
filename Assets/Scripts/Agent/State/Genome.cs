@@ -15,7 +15,9 @@ public class Genome : MonoBehaviour
     [HideInInspector] public float wanderRate = 0.001f;
     [HideInInspector] public float senseRadius = 30f;
     [HideInInspector] public float mutationProbability = 0.1f;
-     [HideInInspector] public float strength = 0.1f;
+    [HideInInspector] public float strength = 0.1f;
+    [HideInInspector] public float intimidationFactor = 0.5f;
+    [HideInInspector] public float perceptionAccuracy = 0.5f;
     [HideInInspector] public Color color = new Color(0,0,0);
     [HideInInspector] public float threshold = 60.0f; // if hunger < threshold: search for food, else; search for partner
 
@@ -28,7 +30,9 @@ public class Genome : MonoBehaviour
     public float[] wanderRate_interval = {0.0001f, 0.001f};
     public float[] senseRadius_interval = {10f, 50f};
     public float[] strength_interval = {0.05f, 1f};
-    public float[] threshold_interval = {40f, 90f};
+    public float[] intimidationFactor_interval = {0.05f, 1f};
+    public float[] perceptionAccuracy_interval = {0.05f, 1f};
+    public float[] threshold_interval = {30f, 60f};
     public Color[] possibleColors = new Color[3];
     public int attractiveness = 0;
 
@@ -66,6 +70,12 @@ public class Genome : MonoBehaviour
         //Strength
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             strength = Random.Range(strength_interval[0], strength_interval[1]);
+        //IntimidationFactor
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            intimidationFactor = Random.Range(intimidationFactor_interval[0], intimidationFactor_interval[1]);
+        //PerceptionAccuracy
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            perceptionAccuracy = Random.Range(perceptionAccuracy_interval[0], perceptionAccuracy_interval[1]);
         //Threshold
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             threshold = Random.Range(threshold_interval[0], threshold_interval[1]);
@@ -122,6 +132,18 @@ public class Genome : MonoBehaviour
             strength = Random.Range(strength_interval[0], strength_interval[1]);
         else
             strength = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.strength : go_2.strength;
+
+        //IntimidationFactor
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            intimidationFactor = Random.Range(intimidationFactor_interval[0], intimidationFactor_interval[1]);
+        else
+            intimidationFactor = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.intimidationFactor : go_2.intimidationFactor;
+        
+        //PerceptionAccuracy
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            perceptionAccuracy = Random.Range(perceptionAccuracy_interval[0], perceptionAccuracy_interval[1]);
+        else
+            perceptionAccuracy = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.perceptionAccuracy : go_2.perceptionAccuracy;
 
         //Threshold
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
@@ -183,6 +205,18 @@ public class Genome : MonoBehaviour
             strength = Random.Range(strength_interval[0], strength_interval[1]);
         else
             strength = (go_1.strength + go_2.strength)/2;
+
+        //IntimidationFactor
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            intimidationFactor = Random.Range(intimidationFactor_interval[0], intimidationFactor_interval[1]);
+        else
+            strength = (go_1.intimidationFactor + go_2.intimidationFactor)/2;
+        
+        //PerceptionAccuracy
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            perceptionAccuracy = Random.Range(perceptionAccuracy_interval[0], perceptionAccuracy_interval[1]);
+        else
+            perceptionAccuracy = (go_1.perceptionAccuracy + go_2.perceptionAccuracy)/2;
         
         //Threshold
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)

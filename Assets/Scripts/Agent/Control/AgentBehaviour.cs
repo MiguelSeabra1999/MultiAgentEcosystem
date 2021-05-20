@@ -34,11 +34,11 @@ public class AgentBehaviour : MonoBehaviour
     //Attack
     private GameObject agentToAttack = null;
     private bool followingAgentToAttack = false;
-    private float attackDelay = 5f;
     private bool canAttack = true;
 
     public GameObject agentPrefab;
     private float smallBias = 2f;
+    private float bias = 4f;
     
     private void Awake() {
         moveActuator = GetComponent<MoveActuator>();
@@ -63,20 +63,23 @@ public class AgentBehaviour : MonoBehaviour
     private void Update() {
         if(state.blocked) return;
 
-        if(!agentDeliberation.IsSearchingPartner()) {
+        if(followingAgentToAttack) {
+            FollowAgentToAttack();
+        }
+        else if(!agentDeliberation.IsSearchingPartner()) {
             partner = null;
             followingPartner = false;
         }
         else if(followingPartner) {
             FollowPartner();   
         }
-        else if(followingAgentToAttack)
-            FollowAgentToAttack();  
-
-        else if((!smell.smellingFood || !agentDeliberation.IsSearchingFood()) && !followingAgentToAttack && !followingPartner)
+        else if(!smell.smellingFood)
             Wander();
-
         
+        if(partner == null && followingPartner)
+            followingPartner = false;
+        if(agentToAttack == null && followingAgentToAttack)
+            followingAgentToAttack = false;
     }
 
     private void Wander()
@@ -101,12 +104,14 @@ public class AgentBehaviour : MonoBehaviour
             if(UnityEngine.Random.Range(0f, 1f) <= agentDeliberation.ProbabilityFollowToProcreate(dist)) {
                 partner = go;
                 followingPartner = true;
+                UnityEngine.Debug.Log("Partner chosen, now following");
             }
         }
         else if(agentDeliberation.IsSearchingFood() && !smell.smellingFood && !followingAgentToAttack) { //ATTACK
             if(UnityEngine.Random.Range(0f, 1f) <= agentDeliberation.ProbabilityFollowToAttack(dist)) {
                 agentToAttack = go;
                 followingAgentToAttack = true;
+                UnityEngine.Debug.Log("Enemy chosen, now following");
             }
         }
     }
@@ -114,7 +119,7 @@ public class AgentBehaviour : MonoBehaviour
     private void SmellFoodHandler(Vector3 pos)
     {
         if(state.blocked) return;
-        if(agentDeliberation.IsSearchingFood()) {
+        if(agentDeliberation.IsSearchingFood() && !followingAgentToAttack) {
             Vector3 dir3D = (pos-transform.position).normalized;
             UnityEngine.Debug.Log("going food");
             Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
@@ -143,11 +148,14 @@ public class AgentBehaviour : MonoBehaviour
                     createAgents.NumberAgents++;
                     //maybe agents lose energy
                 }
+                else{
+                    canProcreate = false;
+                    Invoke("ProcreateCooldown", procreateDelay); 
+                }
                 followingPartner = false;
                 partner = null;
             }
             else {//going after agent
-                UnityEngine.Debug.Log("going partner:" + dir3D);
                 Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
                 moveActuator.SetMovement(dir2D);
             }
@@ -156,27 +164,20 @@ public class AgentBehaviour : MonoBehaviour
 
     private void FollowAgentToAttack()
     {   
-        if(agentToAttack != null) {
+        if(agentToAttack != null) { 
             float dist = Vector3.Distance(agentToAttack.transform.position, transform.position);
             Vector3 dir3D = (agentToAttack.transform.position - transform.position).normalized;
+
             if(dist <= smallBias)  {//agent together
                 if(canAttack) { //going to attack
-                    state.SetBlock(true);
-                    agentToAttack.GetComponent<State>().SetBlock(true);
-                    canAttack = false;
-                    Invoke("AttackCooldown", attackDelay);
-                    attack.AttackAgent(agentToAttack);
-                    state.SetBlock(false);
-                    agentToAttack.GetComponent<State>().SetBlock(false);
-
-                    agentToAttack = null;
-                    followingAgentToAttack = false;
-
+                    UnityEngine.Debug.Log("Fight");
+                    Fight();
                     //maybe agents lose energy
                 }
                 followingAgentToAttack = false;
                 agentToAttack = null;
             }
+            
             else {  //going after agent
                 Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
                 moveActuator.SetMovement(dir2D);
@@ -231,6 +232,48 @@ public class AgentBehaviour : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(transform.rotation.x,normalAngle,transform.rotation.z);
         state.SetBlock(false);
+    }
+
+    private void Fight() {
+        string agent1_decision, agent2_decision;
+
+        agent1_decision = agentDeliberation.RunOrAttack(agentToAttack);
+        agent2_decision = agentToAttack.GetComponent<AgentDeliberation>().RunOrAttack(gameObject);
+
+
+        if(agent1_decision == "attack" && agent2_decision == "attack") {
+            state.SetBlock(true);
+            agentToAttack.GetComponent<State>().SetBlock(true);
+
+            attack.AttackAgent(agentToAttack);
+            agentToAttack.GetComponent<Attack>().AttackAgent(gameObject);
+
+            state.SetBlock(false);
+            agentToAttack.GetComponent<State>().SetBlock(false);
+        }
+        else if(agent1_decision == "run" && agent2_decision == "attack") {
+            agentToAttack.GetComponent<State>().SetBlock(true);
+
+            if(Vector3.Distance(agentToAttack.transform.position, transform.position) <= bias)
+                agentToAttack.GetComponent<Attack>().AttackAgent(gameObject);
+
+            agentToAttack.GetComponent<State>().SetBlock(false);
+        }
+        else if(agent1_decision == "attack" && agent2_decision == "run") {
+            state.SetBlock(true);
+
+            if(Vector3.Distance(agentToAttack.transform.position, transform.position) <= bias)
+                attack.AttackAgent(agentToAttack);
+
+            state.SetBlock(false);
+        }
+        else {
+            ;
+        }
+        followingAgentToAttack = false;
+        agentToAttack = null;
+
+        canAttack = false;
     }
 
     void OnDestroy()

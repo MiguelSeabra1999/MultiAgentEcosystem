@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(MoveActuator))]
 public class State : MonoBehaviour
 {
-    public float consistentHungerDrainRate = 0.01f;
+    public float consistentHungerDrainRate = 0.005f;
     public float consistentPeaceDrainRate = 0.000000001f;
     public float hp;
     public float hunger = 100;
@@ -108,7 +108,6 @@ public class State : MonoBehaviour
         {
             moveActuator.SetMovement(Vector2.zero);
         }
-
 
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ public class AgentDeliberation : MonoBehaviour
         state = GetComponent<State>();
         genome = GetComponent<Genome>();
     }
-    public bool IsSearchingFood() {
+    public bool IsSearchingFood() {  // one 
+        
         return (state.hunger <= genome.threshold);
     }
 
@@ -51,5 +53,17 @@ public class AgentDeliberation : MonoBehaviour
         return state.hunger > genome.threshold;
     }
 
+    public string RunOrAttack(GameObject go) {
+        float perception;
+        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor;
+        float other_Strength = go.GetComponent<Genome>().strength;
+        //somtimes agent percepts the other agent's strength to be greater than actually is, sometimes he underestimates
+        perception = genome.perceptionAccuracy * other_Strength + (1 - genome.perceptionAccuracy) * other_IntimidationFactor;
+
+        if(genome.strength >= perception)
+            return "attack";
+        else
+            return "run";
+    }
 
 }
