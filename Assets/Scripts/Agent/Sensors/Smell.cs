@@ -8,7 +8,7 @@ public class Smell : MonoBehaviour
     public float updateRate  = 0.1f;
     private Genome genome;
     public bool smellingFood = false;
-    [HideInInspector]public event UnityAction<Vector3> smelledFoodEvent;
+    [HideInInspector]public event UnityAction<GameObject> smelledFoodEvent;
 
     void Start()
     {
@@ -19,12 +19,12 @@ public class Smell : MonoBehaviour
     private IEnumerator SmellRoutine()
     {
         float minDist = Mathf.Infinity;
-        Vector3 nearestFoodPos = Vector3.zero;
+        GameObject nearestFood= null;
       
         while(true)
         {
                     // Play a noise if an object is within the sphere's radius.
-            Collider[] foods = Physics.OverlapSphere(transform.position, genome.senseRadius, LayerMask.GetMask("Food"));
+            Collider[] foods = Physics.OverlapSphere(transform.position, genome.smellRadius, LayerMask.GetMask("Food"));
             if (foods.Length > 0)
             {
                 foreach(Collider coll in foods)
@@ -33,12 +33,12 @@ public class Smell : MonoBehaviour
                     if(dist < minDist)
                     {
                         minDist = dist;
-                        nearestFoodPos = coll.transform.position;
+                        nearestFood = coll.gameObject;
                     }
                 }
                 
                 if(smelledFoodEvent != null)
-                    smelledFoodEvent.Invoke(nearestFoodPos);
+                    smelledFoodEvent.Invoke(nearestFood);
                 smellingFood = true;
             }
             else

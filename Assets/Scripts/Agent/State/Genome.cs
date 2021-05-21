@@ -13,6 +13,7 @@ public class Genome : MonoBehaviour
     [HideInInspector] public float starvingDamage = 0.1f;
     [HideInInspector] public float angryDamage = 0.1f;
     [HideInInspector] public float wanderRate = 0.001f;
+    [HideInInspector] public float smellRadius = 30f;
     [HideInInspector] public float senseRadius = 30f;
     [HideInInspector] public float mutationProbability = 0.1f;
     [HideInInspector] public float strength = 0.1f;
@@ -29,6 +30,7 @@ public class Genome : MonoBehaviour
     public float[] starvingDamage_interval = {0.05f, 0.1f};
     public float[] wanderRate_interval = {0.0001f, 0.001f};
     public float[] senseRadius_interval = {10f, 50f};
+    public float[] smellRadius_interval = {10f, 50f};
     public float[] strength_interval = {0.05f, 1f};
     public float[] intimidationFactor_interval = {0.05f, 1f};
     public float[] perceptionAccuracy_interval = {0.05f, 1f};
@@ -67,6 +69,8 @@ public class Genome : MonoBehaviour
         //SenseRadius
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             senseRadius = Random.Range(senseRadius_interval[0], senseRadius_interval[1]);
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            smellRadius = Random.Range(smellRadius_interval[0], smellRadius_interval[1]);
         //Strength
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
             strength = Random.Range(strength_interval[0], strength_interval[1]);
@@ -126,6 +130,11 @@ public class Genome : MonoBehaviour
             senseRadius = Random.Range(senseRadius_interval[0], senseRadius_interval[1]);
         else
             senseRadius = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.senseRadius : go_2.senseRadius;
+        //SenseRadius
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            smellRadius = Random.Range(smellRadius_interval[0], smellRadius_interval[1]);
+        else
+            smellRadius = (Random.Range(0.0f, 1.0f) >= 0.5f) ? go_1.smellRadius : go_2.smellRadius;
 
         //Strength
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)
@@ -199,6 +208,10 @@ public class Genome : MonoBehaviour
             senseRadius = Random.Range(senseRadius_interval[0], senseRadius_interval[1]);
         else
             senseRadius = (go_1.senseRadius + go_2.senseRadius)/2;
+        if(Random.Range(0.0f, 1.0f) <= mutationProbability)
+            smellRadius = Random.Range(smellRadius_interval[0], smellRadius_interval[1]);
+        else
+            smellRadius = (go_1.smellRadius + go_2.smellRadius)/2;
 
         //Strength
         if(Random.Range(0.0f, 1.0f) <= mutationProbability)

@@ -65,5 +65,14 @@ public class AgentDeliberation : MonoBehaviour
         else
             return "run";
     }
+    public float RunOrAttackFloat(GameObject go) {
+        float perception;
+        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor;
+        float other_Strength = go.GetComponent<Genome>().strength;
+        //somtimes agent percepts the other agent's strength to be greater than actually is, sometimes he underestimates
+        perception = genome.perceptionAccuracy * other_Strength + (1 - genome.perceptionAccuracy) * other_IntimidationFactor;
+
+        return perception;
+    }
 
 }
