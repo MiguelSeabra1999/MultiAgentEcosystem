@@ -29,6 +29,7 @@ public class State : MonoBehaviour
     void Start()
     {
         hp = genome.vitality.value;
+        Debug.Log(hp);
         blocked = false;
     }
 

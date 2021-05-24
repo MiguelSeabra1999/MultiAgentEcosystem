@@ -48,7 +48,7 @@ public class Mate : AgentAction
             return 0;
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
    
-        return(agentBehaviour.state.hunger/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius.value));
+        return(agentBehaviour.state.hunger/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius.value)) * agentBehaviour.genome.procreateModifier.value;
     }
 
 }

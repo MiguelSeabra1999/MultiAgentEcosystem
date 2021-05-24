@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7de85fe9b102a4b8a741abbb450648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutricionalValue: 10
+  nutricionalValue: 20
 --- !u!122 &4606375559030026250
 Halo:
   m_ObjectHideFlags: 0
