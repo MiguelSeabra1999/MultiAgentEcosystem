@@ -59,6 +59,6 @@ public class Kill : AgentAction
         float confidence =  agentBehaviour.genome.strength.value / perception;
     
         confidence = Mathf.Clamp(confidence,0f,1f);
-        return ((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius.value)) * confidence * agentBehaviour.genome.attackModifier.value;
+        return ((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.GetSenseRadius())) * confidence * agentBehaviour.genome.attackModifier.value;
     }
 }

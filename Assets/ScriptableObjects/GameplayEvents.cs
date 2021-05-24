@@ -9,6 +9,7 @@ public class GameplayEvents : ScriptableObject
 {
     [HideInInspector]public event UnityAction agentDiedEvent;
     [HideInInspector]public event UnityAction saveDataEvent;
+    [HideInInspector]public event UnityAction passedDayEvent;
     
 
     public void InvokeAgentDiedEvent()
@@ -24,6 +25,13 @@ public class GameplayEvents : ScriptableObject
         if(saveDataEvent!=null)
         {
             saveDataEvent.Invoke();
+        }
+    }
+    public void InvokePassedDayEvent()
+    {
+        if(passedDayEvent!=null)
+        {
+            passedDayEvent.Invoke();
         }
     }
 }

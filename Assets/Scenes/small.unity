@@ -460,12 +460,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefab: {fileID: 5151684292951206930, guid: cff04a46a91ff7c48a5b906088ffaecd, type: 3}
-  minX: -5
-  minY: -5
-  maxX: 5
-  maxY: 5
+  minX: -10
+  minY: -10
+  maxX: 10
+  maxY: 10
   spawnChance: 0.02
-  initialBurst: 10
+  initialBurst: 20
   spawnChanceFrequency: 0.1
 --- !u!114 &673356472
 MonoBehaviour:
@@ -481,11 +481,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayEvents: {fileID: 11400000, guid: ba028adf66decf14984f034439566392, type: 2}
   agentPrefab: {fileID: 266069031307240845, guid: 7a132c35d8286614289307e670a928d1, type: 3}
-  minX: -1
-  minY: -1
-  maxX: 1
-  maxY: 1
-  NumberAgents: 1
+  minX: -15
+  minY: -15
+  maxX: 15
+  maxY: 15
+  NumberAgents: 10
 --- !u!114 &673356474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +502,7 @@ MonoBehaviour:
   DirectionalLight: {fileID: 705507994}
   Preset: {fileID: 11400000, guid: b540d7fba21a51d4f83ee8c91eafd8d2, type: 2}
   daysCounter: 0
+  text: {fileID: 0}
   TimeOfDay: 6.2
 --- !u!1 &705507993
 GameObject:

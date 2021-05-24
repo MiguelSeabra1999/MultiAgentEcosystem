@@ -7,12 +7,15 @@ using UnityEngine;
 [RequireComponent(typeof(MoveActuator))]
 public class State : MonoBehaviour
 {
+    public GameplayEvents gameplayEvents;
     public float consistentHungerDrainRate = 0.005f;
     public float consistentPeaceDrainRate = 0.000000001f;
     public float hp;
     public float hunger = 100;
     public float peace = 100;
     public bool blocked = false;
+    public int maxDaysAlive = 10;
+    private int daysToLive;
     private Genome genome;
     private Animator animator;
     private Feel feel;
@@ -24,12 +27,13 @@ public class State : MonoBehaviour
         feel = GetComponent<Feel>();
         rendererFXInterface = GetComponent<RendererFXInterface>();
         animator = GetComponentInChildren<Animator>();
-        moveActuator = GetComponent<MoveActuator>();
+        daysToLive = maxDaysAlive;
+        gameplayEvents.passedDayEvent += PassedDayHandler;
     }
     void Start()
     {
         hp = genome.vitality.value;
-//        Debug.Log(hp);
+//        Debug.Log(hp);PassedDayHandler
         blocked = false;
     }
 
@@ -110,5 +114,12 @@ public class State : MonoBehaviour
             moveActuator.SetMovement(Vector2.zero);
         }
 
+    }
+
+    private void PassedDayHandler()
+    {
+        daysToLive--;
+        if(daysToLive == 0)
+            Destroy(gameObject);
     }
 }

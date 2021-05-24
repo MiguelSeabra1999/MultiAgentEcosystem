@@ -12,8 +12,7 @@ public class Genome : MonoBehaviour
     [HideInInspector] public Gene starvingDamage;
    // [HideInInspector] public Gene angryDamage;
     [HideInInspector] public Gene wanderRate;
-    [HideInInspector] public Gene smellRadius;
-    [HideInInspector] public Gene senseRadius;
+    [HideInInspector] public Gene smellToSenseRatio;
     [HideInInspector] public Gene strength;
     [HideInInspector] public Gene intimidationFactor;
     [HideInInspector] public Gene perceptionAccuracy;
@@ -25,7 +24,7 @@ public class Genome : MonoBehaviour
     public Color[] possibleColors = new Color[3];
     public int attractiveness = 0;
     private RendererFXInterface rendererFXInterface;
-
+    private float totalRadius = 10;
 
     private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();
@@ -34,8 +33,7 @@ public class Genome : MonoBehaviour
         starvingDamage = new Gene();
        // angryDamage = new Gene();
         wanderRate = new Gene();
-        smellRadius = new Gene();
-        senseRadius = new Gene();
+        smellToSenseRatio = new Gene();
         strength = new Gene();
         intimidationFactor = new Gene();
         perceptionAccuracy = new Gene();
@@ -58,11 +56,9 @@ public class Genome : MonoBehaviour
         wanderRate.min = 0.0001f;
         wanderRate.max = 0.001f;
 
-        senseRadius.min = 10f;
-        senseRadius.max = 50f;
+        smellToSenseRatio.min = 0f;
+        smellToSenseRatio.max = 1f;
 
-        smellRadius.min = 10f;
-        smellRadius.max = 50f;
 
         strength.min = 0.05f;
         strength.max = 1f;
@@ -100,9 +96,7 @@ public class Genome : MonoBehaviour
         //WanderRate
         wanderRate.GeneWithMutations(mutationProbability);
         //SenseRadius
-        senseRadius.GeneWithMutations(mutationProbability);
-        //SmellRadius
-        smellRadius.GeneWithMutations(mutationProbability);
+        smellToSenseRatio.GeneWithMutations(mutationProbability);
         //Strength
         strength.GeneWithMutations(mutationProbability);
         //IntimidationFactor
@@ -131,10 +125,8 @@ public class Genome : MonoBehaviour
         starvingDamage.NewGene(go_1.starvingDamage, go_2.starvingDamage, mutationProbability);
         //WanderRate
         wanderRate.NewGene(go_1.wanderRate, go_2.wanderRate, mutationProbability);
-        //SenseRadius
-        senseRadius.NewGene(go_1.senseRadius, go_2.senseRadius, mutationProbability);
-        //SmellRadius
-        smellRadius.NewGene(go_1.smellRadius, go_2.smellRadius, mutationProbability);
+        //smellToSenseRatio
+        smellToSenseRatio.NewGene(go_1.smellToSenseRatio, go_2.smellToSenseRatio, mutationProbability);
         //Strength
         strength.NewGene(go_1.strength, go_2.strength, mutationProbability);
         //IntimidationFactor
@@ -164,10 +156,8 @@ public class Genome : MonoBehaviour
         starvingDamage.NewGeneWithParentsMeans(go_1.starvingDamage, go_2.starvingDamage, mutationProbability);
         //WanderRate
         wanderRate.NewGeneWithParentsMeans(go_1.wanderRate, go_2.wanderRate, mutationProbability);
-        //SenseRadius
-        senseRadius.NewGeneWithParentsMeans(go_1.senseRadius, go_2.senseRadius, mutationProbability);
-        //SmellRadius
-        smellRadius.NewGeneWithParentsMeans(go_1.smellRadius, go_2.smellRadius, mutationProbability);
+        //smellToSenseRatio
+        smellToSenseRatio.NewGeneWithParentsMeans(go_1.smellToSenseRatio, go_2.smellToSenseRatio, mutationProbability);
         //Strength
         strength.NewGeneWithParentsMeans(go_1.strength, go_2.strength, mutationProbability);
         //IntimidationFactor
@@ -185,6 +175,14 @@ public class Genome : MonoBehaviour
         color = possibleColors[attractiveness];
     }
 
+    public float GetSenseRadius()
+    {
+        return smellToSenseRatio.value * totalRadius;
+    }
+    public float GetSmellRadius()
+    {
+        return (1 - smellToSenseRatio.value) * totalRadius;
+    }
 
 
 }
