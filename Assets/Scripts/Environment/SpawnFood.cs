@@ -22,14 +22,17 @@ public class SpawnFood : MonoBehaviour
         StartCoroutine(SpawnRoutine());
         for(int i = 0; i < initialBurst;i++)
             SpawnFoodAtRandomLocation();
+
+
     }   
 
     private IEnumerator SpawnRoutine()
     {
         while(true)
         {
-            if(UnityEngine.Random.Range(0f,1f) < spawnChance)
+            if(UnityEngine.Random.Range(0f,1f) < spawnChance) {
                 SpawnFoodAtRandomLocation();
+            }
             yield return new WaitForSeconds(spawnChanceFrequency);
         }
     }
@@ -40,4 +43,5 @@ public class SpawnFood : MonoBehaviour
         float y = UnityEngine.Random.Range(minY,maxY);
         Instantiate(foodPrefab, new Vector3(x,0,y), Quaternion.identity);
     }
+
 }

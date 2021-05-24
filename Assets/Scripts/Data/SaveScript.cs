@@ -20,7 +20,7 @@ public class SaveScript : MonoBehaviour
 
         using (StreamWriter tw = new StreamWriter(savePath))
         {
-            tw.Write("Agents    days\n");
+            tw.Write("Agents    days    Food\n");
             tw.Close();
         }
 
@@ -32,7 +32,7 @@ public class SaveScript : MonoBehaviour
     {
 
         UnityEngine.Debug.Log("Saving data....");
-        string save = gameData.GetAgents() + " " + Mathf.Round(gameData.GetDays()) + "\n";
+        string save = gameData.GetAgents() + " " + Mathf.Floor(gameData.GetDays()) + " " + gameData.GetFoodCount();
 
         StreamWriter writer = new StreamWriter(savePath, true);
         writer.WriteLine(save);

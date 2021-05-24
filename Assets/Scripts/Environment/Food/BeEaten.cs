@@ -29,4 +29,5 @@ public class BeEaten : MonoBehaviour
                 Destroy(gameObject);
         }*/
     }
+
 }

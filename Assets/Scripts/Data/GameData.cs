@@ -9,8 +9,11 @@ public class GameData : MonoBehaviour
 
     public DaysController daysController;
     public CreateAgents createAgents;
+    public SpawnFood spawnFood;
+    //public CreateAgents createAgents;
     public int agents {get; set;}
     public float days {get; set;}
+    public int foodCount {get; set;}
 
     //[SerializeField]
     private Text agentsText;
@@ -38,6 +41,10 @@ public class GameData : MonoBehaviour
     public float GetDays() {
         days = daysController.daysCounter;
         return days;
+    }
+    public int GetFoodCount() {
+
+        return GameObject.FindGameObjectsWithTag("Food").Length;
     }
 
 }

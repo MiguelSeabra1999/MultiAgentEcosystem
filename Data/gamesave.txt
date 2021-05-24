@@ -1,7 +1,3 @@
-Agents    days
-1 2
-
-1 3
-
-0 4
-
+Agents    days    Food
+1 1 153
+0 2 193

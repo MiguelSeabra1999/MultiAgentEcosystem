@@ -737,7 +737,7 @@ MonoBehaviour:
   Preset: {fileID: 11400000, guid: b540d7fba21a51d4f83ee8c91eafd8d2, type: 2}
   daysCounter: 0
   text: {fileID: 434773255}
-  TimeOfDay: 6.2
+  TimeOfDay: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,6 +1370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   daysController: {fileID: 673356474}
   createAgents: {fileID: 673356472}
+  spawnFood: {fileID: 0}
 --- !u!4 &1425482021
 Transform:
   m_ObjectHideFlags: 0
