@@ -29,13 +29,13 @@ public class State : MonoBehaviour
     void Start()
     {
         hp = genome.vitality.value;
-        Debug.Log(hp);
+//        Debug.Log(hp);
         blocked = false;
     }
 
     private void FixedUpdate() {
         hunger -= consistentHungerDrainRate;
-        peace -= consistentPeaceDrainRate*genome.angryDamage.value;
+       // peace -= consistentPeaceDrainRate*genome.angryDamage.value;
 
         if(hunger <= 0)
         {
@@ -48,12 +48,12 @@ public class State : MonoBehaviour
             StarveToDeath();
         }
 
-        if (peace <= 0)
+       /* if (peace <= 0)
         {
             peace = 0;
             if (feel.feelingAgent)
                 Attack();
-        }
+        }*/
 
     }
 
