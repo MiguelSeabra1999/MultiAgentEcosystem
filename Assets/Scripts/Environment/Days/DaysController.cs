@@ -2,13 +2,14 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class DaysController : MonoBehaviour
 {
     public GameplayEvents gameplayEvents;
     public Light DirectionalLight;
     public LightingPreset Preset;
     public float daysCounter = 0;
+    public TMP_Text text;
     [SerializeField, Range(0, 24)] private float TimeOfDay;
 
    void Awake() {
@@ -25,6 +26,7 @@ public class DaysController : MonoBehaviour
             TimeOfDay += Time.deltaTime;
             if(TimeOfDay >= 24f) {
                 daysCounter++;
+                text.text = "DAY: " + Mathf.Round(daysCounter);
                 gameplayEvents.InvokeSaveData();
             }
             TimeOfDay %= 24; //Modulus to ensure always between 0-24

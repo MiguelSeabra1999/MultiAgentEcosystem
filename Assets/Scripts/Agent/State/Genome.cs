@@ -10,7 +10,7 @@ public class Genome : MonoBehaviour
     [HideInInspector] public Gene speed;
     [HideInInspector] public Gene vitality;
     [HideInInspector] public Gene starvingDamage;
-    [HideInInspector] public Gene angryDamage;
+   // [HideInInspector] public Gene angryDamage;
     [HideInInspector] public Gene wanderRate;
     [HideInInspector] public Gene smellRadius;
     [HideInInspector] public Gene senseRadius;
@@ -32,7 +32,7 @@ public class Genome : MonoBehaviour
         speed = new Gene();
         vitality = new Gene();
         starvingDamage = new Gene();
-        angryDamage = new Gene();
+       // angryDamage = new Gene();
         wanderRate = new Gene();
         smellRadius = new Gene();
         senseRadius = new Gene();
@@ -49,8 +49,8 @@ public class Genome : MonoBehaviour
         vitality.min = 5f;
         vitality.max = 20f;
 
-        angryDamage.min = 0.05f;
-        angryDamage.max = 0.1f;
+       // angryDamage.min = 0.05f;
+      //  angryDamage.max = 0.1f;
 
         starvingDamage.min = 0.05f;
         starvingDamage.max = 0.1f;
@@ -94,7 +94,7 @@ public class Genome : MonoBehaviour
         //Vitality 
         vitality.GeneWithMutations(mutationProbability);
         //AngryDamage
-        angryDamage.GeneWithMutations(mutationProbability);
+       // angryDamage.GeneWithMutations(mutationProbability);
         //StarvingDamage
         starvingDamage.GeneWithMutations(mutationProbability);
         //WanderRate
@@ -126,7 +126,7 @@ public class Genome : MonoBehaviour
         //Vitality 
         vitality.NewGene(go_1.vitality, go_2.vitality, mutationProbability);
         //AngryDamage
-        angryDamage.NewGene(go_1.angryDamage, go_2.angryDamage, mutationProbability);
+     //   angryDamage.NewGene(go_1.angryDamage, go_2.angryDamage, mutationProbability);
         //StarvingDamage
         starvingDamage.NewGene(go_1.starvingDamage, go_2.starvingDamage, mutationProbability);
         //WanderRate
@@ -159,7 +159,7 @@ public class Genome : MonoBehaviour
         //Vitality 
         vitality.NewGeneWithParentsMeans(go_1.vitality, go_2.vitality, mutationProbability);
         //AngryDamage
-        angryDamage.NewGeneWithParentsMeans(go_1.angryDamage, go_2.angryDamage, mutationProbability);
+     //   angryDamage.NewGeneWithParentsMeans(go_1.angryDamage, go_2.angryDamage, mutationProbability);
         //StarvingDamage
         starvingDamage.NewGeneWithParentsMeans(go_1.starvingDamage, go_2.starvingDamage, mutationProbability);
         //WanderRate

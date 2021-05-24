@@ -485,7 +485,7 @@ MonoBehaviour:
   minY: -1
   maxX: 1
   maxY: 1
-  NumberAgents: 3
+  NumberAgents: 1
 --- !u!114 &673356474
 MonoBehaviour:
   m_ObjectHideFlags: 0

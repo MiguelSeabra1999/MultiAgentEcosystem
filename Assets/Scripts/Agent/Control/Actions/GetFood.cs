@@ -10,7 +10,9 @@ public class GetFood : AgentAction
     {}
     public override void BeginAction()
     {
-        Vector3 dir3D = (target.transform.position-agentBehaviour.transform.position).normalized;
+        Vector3 offset = target.transform.position-agentBehaviour.transform.position;
+
+        Vector3 dir3D = offset.normalized;
         UnityEngine.Debug.Log("going food");
         Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
         agentBehaviour.moveActuator.SetMovement(dir2D);
@@ -24,7 +26,15 @@ public class GetFood : AgentAction
             agentBehaviour.agentIntentions.Reconsider();
             return;
         }
-        Vector3 dir3D = (target.transform.position-agentBehaviour.transform.position).normalized;
+
+        Vector3 offset = target.transform.position-agentBehaviour.transform.position;
+        if(offset.magnitude < 0.3f)
+        {
+            agentBehaviour.moveActuator.SetMovement(Vector2.zero);
+            agentBehaviour.agentIntentions.Reconsider();
+            return;
+        }
+        Vector3 dir3D = offset.normalized;
        // UnityEngine.Debug.Log("going food");
         Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
         agentBehaviour.moveActuator.SetMovement(dir2D);
@@ -35,7 +45,8 @@ public class GetFood : AgentAction
         if(target == null)
             return 0;
         float distToFood = (target.transform.position - agentBehaviour.transform.position).magnitude;
-      
+        if(agentBehaviour.state.hunger >70)
+            return 0;
         return (agentBehaviour.state.hunger/100) * (1 - (distToFood/agentBehaviour.genome.smellRadius.value));
     }
 }
