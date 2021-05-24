@@ -10,6 +10,7 @@ public class DaysController : MonoBehaviour
     public LightingPreset Preset;
     public float daysCounter = 0;
     public TMP_Text text;
+
     [SerializeField, Range(0, 24)] private float TimeOfDay;
 
    void Awake() {
@@ -28,6 +29,7 @@ public class DaysController : MonoBehaviour
                 daysCounter++;
                 text.text = "DAY: " + Mathf.Round(daysCounter);
                 gameplayEvents.InvokeSaveData();
+                gameplayEvents.InvokePassedDayEvent();
             }
             TimeOfDay %= 24; //Modulus to ensure always between 0-24
                 daysCounter = Mathf.Floor(daysCounter) + TimeOfDay / 24f;

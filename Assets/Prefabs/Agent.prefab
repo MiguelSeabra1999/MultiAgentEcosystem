@@ -170,12 +170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff43fbe4efbb91640b30b9dcac1122f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayEvents: {fileID: 11400000, guid: ba028adf66decf14984f034439566392, type: 2}
   consistentHungerDrainRate: 0.01
   consistentPeaceDrainRate: 0.01
   hp: 100
   hunger: 100
   peace: 100
   blocked: 0
+  maxDaysAlive: 5
 --- !u!114 &4719063023130372448
 MonoBehaviour:
   m_ObjectHideFlags: 0
