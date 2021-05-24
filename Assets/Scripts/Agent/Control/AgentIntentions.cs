@@ -30,11 +30,11 @@ public class AgentIntentions : MonoBehaviour
 
         AgentAction bestAction = null;
         float maximumDesirability = 0;
-            Debug.Log("considering:");
+//            Debug.Log("considering:");
         foreach(AgentAction agentAction in possibleActions)
         {
             float desirability = agentAction.Consider();
-            Debug.Log(desirability);
+         //   Debug.Log(desirability);
             if(desirability > maximumDesirability)
             {
                 maximumDesirability = desirability;

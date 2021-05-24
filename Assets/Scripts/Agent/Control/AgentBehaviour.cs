@@ -24,6 +24,7 @@ public class AgentBehaviour : MonoBehaviour
     private Attack attack;
     private ParticleManager particleManager;
     [HideInInspector] public bool canProcreate = true;
+    [HideInInspector] public bool canAttack = true;
     private float timeSinceLastWanderShift;
     private bool firstFrame = true;
     private float procreateDelay = 1f;
@@ -126,8 +127,8 @@ public class AgentBehaviour : MonoBehaviour
             UnityEngine.Debug.Log("Baby");
             createAgents.NumberAgents++;
 
-        state.hunger -= 50;
-        partner.GetComponent<State>().hunger -= 50;
+        state.hunger -= 20;
+        partner.GetComponent<State>().hunger -= 20;
     }
 
     public void GetDumped()
@@ -186,7 +187,26 @@ public class AgentBehaviour : MonoBehaviour
         state.SetBlock(false);
     }
   
-  
+    private Vector2 Reflect(Vector2 forwardDir, Vector2 normal)
+    {
+        return forwardDir - 2f * Vector2.Dot(forwardDir,normal)*normal;
+    }
+
+    private Vector2 Convert3Dto2D(Vector3 vec)
+    {
+        return new Vector2(vec.x,vec.z);
+    }
+    private Vector3 Convert2Dto3D(Vector2 vec)
+    {
+        return new Vector3(vec.x,0,vec.z);
+    }
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            Vector2 newDir = 
+        }
+    }
+    
 
     void OnDestroy()
     {
