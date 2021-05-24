@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba6be909765bb044b931f523a6e8212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayEvents: {fileID: 11400000, guid: ba028adf66decf14984f034439566392, type: 2}
   mutationProbability: 1
   color: {r: 0.3882353, g: 0.7254902, b: 0.23529412, a: 1}
   possibleColors:

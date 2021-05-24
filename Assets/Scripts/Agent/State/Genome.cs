@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Genome : MonoBehaviour
 {
+    public GameplayEvents gameplayEvents;
     //Max values 
     [HideInInspector] public Gene speed;
     [HideInInspector] public Gene vitality;
@@ -25,13 +26,14 @@ public class Genome : MonoBehaviour
     public int attractiveness = 0;
     private RendererFXInterface rendererFXInterface;
     private float totalRadius = 10;
-
+    private List<Gene> genes = new List<Gene>();
     private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();
+        gameplayEvents.saveDataEvent += SaveData;
+
         speed = new Gene();
         vitality = new Gene();
         starvingDamage = new Gene();
-       // angryDamage = new Gene();
         wanderRate = new Gene();
         smellToSenseRatio = new Gene();
         strength = new Gene();
@@ -40,6 +42,18 @@ public class Genome : MonoBehaviour
         procreateModifier = new Gene();
         attackModifier = new Gene();
         minHunger = new Gene();
+
+        genes.Add(speed);
+        genes.Add(vitality);
+        genes.Add(starvingDamage);
+        genes.Add(wanderRate);
+        genes.Add(smellToSenseRatio);
+        genes.Add(strength);
+        genes.Add(intimidationFactor);
+        genes.Add(perceptionAccuracy);
+        genes.Add(procreateModifier);
+        genes.Add(attackModifier);
+        genes.Add(minHunger);
 
         speed.min = 5f;
         speed.max = 20f;
@@ -184,6 +198,14 @@ public class Genome : MonoBehaviour
         return (1 - smellToSenseRatio.value) * totalRadius;
     }
 
+    public void SaveData()
+    {
+        string myData = "";
+        foreach(Gene gene in genes)
+            myData += gene.value + " ";
+
+        gameplayEvents.genomeData.Add(myData);
+    }
 
 }
 
