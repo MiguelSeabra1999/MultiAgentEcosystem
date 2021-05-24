@@ -30,7 +30,7 @@ public class MoveActuator : MonoBehaviour
         {
             AdjustFacingDirection(currentDir);
             state.hunger -= walkingEnergyDrainRate;
-            Debug.DrawRay(transform.position,(new UnityEngine.Vector3(currentDir.x,0,currentDir.y)).normalized * genome.senseRadius, Color.blue);
+            Debug.DrawRay(transform.position,(new UnityEngine.Vector3(currentDir.x,0,currentDir.y)).normalized * genome.senseRadius.value, Color.blue);
         }else
             rb.velocity = UnityEngine.Vector3.zero;
     }
@@ -52,11 +52,11 @@ public class MoveActuator : MonoBehaviour
     public void SetMovement(UnityEngine.Vector2 move)
     {
 
-        rb.velocity = new UnityEngine.Vector3(move.x,0,move.y) * genome.speed;
+        rb.velocity = new UnityEngine.Vector3(move.x,0,move.y) * genome.speed.value;
 
 
         currentDir = move;
-        animator.SetFloat("Speed", genome.speed);
+        animator.SetFloat("Speed", genome.speed.value);
 
         if(move.magnitude > 0.01f && !animator.GetBool("IsWalking") )
             animator.SetBool("IsWalking", true);

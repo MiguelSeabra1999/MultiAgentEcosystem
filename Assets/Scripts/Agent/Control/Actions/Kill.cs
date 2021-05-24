@@ -6,7 +6,6 @@ public class Kill : AgentAction
 {
 
     private float bias = 4f;
-    private bool canFight = true;
     public Kill(AgentBehaviour agentBehaviour) : base(agentBehaviour)
     {}
     public override void BeginAction()
@@ -18,7 +17,7 @@ public class Kill : AgentAction
     
     public override void UpdateAction()
     {
-        if(target == null || !canFight)
+        if(target == null || !agentBehaviour.canAttack)
         {
             agentBehaviour.agentIntentions.Reconsider();
             return;
@@ -33,7 +32,8 @@ public class Kill : AgentAction
           //  if(!agentBehaviour.state.blocked) { //going to attack
                 Debug.Log("Fight");
                 agentBehaviour.Fight(target);
-                canFight = false;
+                agentBehaviour.canAttack = false;
+                agentBehaviour.canProcreate = false;
                 agentBehaviour.StartCoroutine(RestoreCanFight());
                     //maybe agents lose energy
            // }
@@ -44,20 +44,21 @@ public class Kill : AgentAction
 
     public IEnumerator RestoreCanFight()
     {
-        yield return new WaitForSeconds(2f);
-        canFight = true;
+        yield return new WaitForSeconds(4f);
+        agentBehaviour.canAttack = true;
+        agentBehaviour.canProcreate = true;
     }
     public override float Consider()
     {
-        if(target == null || !canFight)
+        if(target == null || !agentBehaviour.canAttack)
             return 0;
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
   
         float perception = agentBehaviour.agentDeliberation.RunOrAttackFloat(target);
 
-        float confidence =  agentBehaviour.genome.strength / perception;
+        float confidence =  agentBehaviour.genome.strength.value / perception;
     
         confidence = Mathf.Clamp(confidence,0f,1f);
-        return ((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius)) * confidence;
+        return ((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius.value)) * confidence;
     }
 }

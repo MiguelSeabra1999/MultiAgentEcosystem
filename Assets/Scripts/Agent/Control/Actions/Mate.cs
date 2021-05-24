@@ -7,7 +7,6 @@ public class Mate : AgentAction
 
 
     private float procreateDelay = 5f;
-    
     private float bias = 4f;
     public Mate(AgentBehaviour agentBehaviour) : base(agentBehaviour)
     {}
@@ -49,7 +48,7 @@ public class Mate : AgentAction
             return 0;
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
    
-        return(agentBehaviour.state.hunger/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius));
+        return(agentBehaviour.state.hunger/100) * (1-(distToTarget/agentBehaviour.genome.senseRadius.value));
     }
 
 }
