@@ -27,7 +27,7 @@ public class AgentBehaviour : MonoBehaviour
     [HideInInspector] public bool canAttack = true;
     private float timeSinceLastWanderShift;
     private bool firstFrame = true;
-    private float procreateDelay = 1f;
+    private float procreateDelay = 4f;
     private float bias = 4f;
 
     public GameObject agentPrefab;
@@ -67,7 +67,7 @@ public class AgentBehaviour : MonoBehaviour
     private void Wander()
     {
         
-        if(firstFrame || UnityEngine.Random.Range(0f,1f) < genome.wanderRate * (Time.time - timeSinceLastWanderShift))
+        if(firstFrame || UnityEngine.Random.Range(0f,1f) < genome.wanderRate.value * (Time.time - timeSinceLastWanderShift))
         {
             timeSinceLastWanderShift = Time.time;
             moveActuator.SetRandomMovement();
@@ -118,7 +118,8 @@ public class AgentBehaviour : MonoBehaviour
     {
           Vector3 dir3D = (partner.transform.position-transform.position).normalized;
 
-           canProcreate = false;
+            canProcreate = false;
+            canAttack = false;
             Invoke("ProcreateCooldown", procreateDelay);
             partner.GetComponent<AgentBehaviour>().BeginBabyRoutine();
             BeginBabyRoutine();
@@ -127,19 +128,20 @@ public class AgentBehaviour : MonoBehaviour
             UnityEngine.Debug.Log("Baby");
             createAgents.NumberAgents++;
 
-        state.hunger -= 20;
-        partner.GetComponent<State>().hunger -= 20;
+        state.hunger -= 10;
+        partner.GetComponent<State>().hunger -= 10;
     }
 
     public void GetDumped()
     {
-         UnityEngine.Debug.Log("dumped");
+        UnityEngine.Debug.Log("dumped");
         canProcreate = false;
         Invoke("ProcreateCooldown", procreateDelay); 
     }
     private void ProcreateCooldown()
     {
         canProcreate = true;
+        canAttack = true;
         state.SetBlock(false);
     }
 

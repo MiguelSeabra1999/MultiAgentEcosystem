@@ -24,7 +24,7 @@ public class Smell : MonoBehaviour
         while(true)
         {
                     // Play a noise if an object is within the sphere's radius.
-            Collider[] foods = Physics.OverlapSphere(transform.position, genome.smellRadius, LayerMask.GetMask("Food"));
+            Collider[] foods = Physics.OverlapSphere(transform.position, genome.smellRadius.value, LayerMask.GetMask("Food"));
             if (foods.Length > 0)
             {
                 foreach(Collider coll in foods)

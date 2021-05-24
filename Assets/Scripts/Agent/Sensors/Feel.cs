@@ -24,7 +24,7 @@ public class Feel : MonoBehaviour
         while (true)
         {
             // Play a noise if an object is within the sphere's radius.
-            Collider[] agents = Physics.OverlapSphere(transform.position, genome.senseRadius, LayerMask.GetMask("Agent"));
+            Collider[] agents = Physics.OverlapSphere(transform.position, genome.senseRadius.value, LayerMask.GetMask("Agent"));
             if (agents.Length > 1)
             {
                 foreach (Collider coll in agents)

@@ -14,6 +14,7 @@ public class AgentDeliberation : MonoBehaviour
         state = GetComponent<State>();
         genome = GetComponent<Genome>();
     }
+    /*
     public bool IsSearchingFood() {  // one 
         
         return (state.hunger <= genome.threshold);
@@ -21,7 +22,7 @@ public class AgentDeliberation : MonoBehaviour
 
     public bool IsSearchingPartner() {
         return (state.hunger > genome.threshold);
-    }
+    }*/
 
     public float ProbabilityFollowToProcreate(float dist) { 
         float likelihood_follow_partner;
@@ -48,29 +49,29 @@ public class AgentDeliberation : MonoBehaviour
            
         return likelihood_attack;
     }
-
+    
     public bool YesToProcreate() {
-        return state.hunger > genome.threshold;
+        return state.hunger > genome.minHunger.value;
     }
 
     public string RunOrAttack(GameObject go) {
         float perception;
-        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor;
-        float other_Strength = go.GetComponent<Genome>().strength;
+        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor.value;
+        float other_Strength = go.GetComponent<Genome>().strength.value;
         //somtimes agent percepts the other agent's strength to be greater than actually is, sometimes he underestimates
-        perception = genome.perceptionAccuracy * other_Strength + (1 - genome.perceptionAccuracy) * other_IntimidationFactor;
+        perception = genome.perceptionAccuracy.value * other_Strength + (1 - genome.perceptionAccuracy.value) * other_IntimidationFactor;
 
-        if(genome.strength >= perception)
+        if(genome.strength.value >= perception)
             return "attack";
         else
             return "run";
     }
     public float RunOrAttackFloat(GameObject go) {
         float perception;
-        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor;
-        float other_Strength = go.GetComponent<Genome>().strength;
+        float other_IntimidationFactor = go.GetComponent<Genome>().intimidationFactor.value;
+        float other_Strength = go.GetComponent<Genome>().strength.value;
         //somtimes agent percepts the other agent's strength to be greater than actually is, sometimes he underestimates
-        perception = genome.perceptionAccuracy * other_Strength + (1 - genome.perceptionAccuracy) * other_IntimidationFactor;
+        perception = genome.perceptionAccuracy.value * other_Strength + (1 - genome.perceptionAccuracy.value) * other_IntimidationFactor;
 
         return perception;
     }

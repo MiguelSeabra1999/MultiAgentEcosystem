@@ -27,7 +27,7 @@ public class Attack : MonoBehaviour
         
         animator.SetTrigger("Attack");
 
-        otherState.hp -= attackValue * genome.strength;
+        otherState.hp -= attackValue * genome.strength.value;
         
         if(otherState.hp <= 0) {
             otherState.Die();

@@ -36,6 +36,6 @@ public class GetFood : AgentAction
             return 0;
         float distToFood = (target.transform.position - agentBehaviour.transform.position).magnitude;
       
-        return (agentBehaviour.state.hunger/100) * (1 - (distToFood/agentBehaviour.genome.smellRadius));
+        return (agentBehaviour.state.hunger/100) * (1 - (distToFood/agentBehaviour.genome.smellRadius.value));
     }
 }

@@ -25,21 +25,21 @@ public class State : MonoBehaviour
         rendererFXInterface = GetComponent<RendererFXInterface>();
         animator = GetComponentInChildren<Animator>();
         moveActuator = GetComponent<MoveActuator>();
-        hp = genome.vitality;
     }
     void Start()
     {
+        hp = genome.vitality.value;
         blocked = false;
     }
 
     private void FixedUpdate() {
         hunger -= consistentHungerDrainRate;
-        peace -= consistentPeaceDrainRate*genome.angryDamage;
+        peace -= consistentPeaceDrainRate*genome.angryDamage.value;
 
         if(hunger <= 0)
         {
             hunger = 0;
-            hp -= genome.starvingDamage;
+            hp -= genome.starvingDamage.value;
         }
 
         if (hp <= 0)
