@@ -198,12 +198,13 @@ public class AgentBehaviour : MonoBehaviour
     }
     private Vector3 Convert2Dto3D(Vector2 vec)
     {
-        return new Vector3(vec.x,0,vec.z);
+        return new Vector3(vec.x,0,vec.y);
     }
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Vector2 newDir = 
+            Vector2 newDir = Reflect(Convert3Dto2D(transform.forward),Convert3Dto2D(other.contacts[0].normal));
+            moveActuator.SetMovement(newDir);
         }
     }
     

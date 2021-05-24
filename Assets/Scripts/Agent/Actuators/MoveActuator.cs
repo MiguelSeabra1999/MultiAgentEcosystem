@@ -77,6 +77,7 @@ public class MoveActuator : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.Euler(0f, angle, 0f);
     }
 
+
     private UnityEngine.Vector2 RandomDirection()
     {
         UnityEngine.Vector2 dir = new UnityEngine.Vector2(Random.Range(-1f,1f),Random.Range(-1f,1f));
