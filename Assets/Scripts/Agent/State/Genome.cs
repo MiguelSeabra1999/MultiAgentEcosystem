@@ -7,29 +7,42 @@ using UnityEngine;
 public class Genome : MonoBehaviour
 {
     //Max values 
-    [HideInInspector] public Gene speed = new Gene();
-    [HideInInspector] public Gene vitality = new Gene();
-    [HideInInspector] public Gene starvingDamage = new Gene();
-    [HideInInspector] public Gene angryDamage = new Gene();
-    [HideInInspector] public Gene wanderRate = new Gene();
-    [HideInInspector] public Gene smellRadius = new Gene();
-    [HideInInspector] public Gene senseRadius = new Gene();
+    [HideInInspector] public Gene speed;
+    [HideInInspector] public Gene vitality;
+    [HideInInspector] public Gene starvingDamage;
+    [HideInInspector] public Gene angryDamage;
+    [HideInInspector] public Gene wanderRate;
+    [HideInInspector] public Gene smellRadius;
+    [HideInInspector] public Gene senseRadius;
+    [HideInInspector] public Gene strength;
+    [HideInInspector] public Gene intimidationFactor;
+    [HideInInspector] public Gene perceptionAccuracy;
+    [HideInInspector] public Gene procreateModifier;
+    [HideInInspector] public Gene attackModifier;
+    [HideInInspector] public Gene minHunger;
     [HideInInspector] public float mutationProbability = 0.1f;
-    [HideInInspector] public Gene strength = new Gene();
-    [HideInInspector] public Gene intimidationFactor = new Gene();
-    [HideInInspector] public Gene perceptionAccuracy = new Gene();
     [HideInInspector] public Color color;
-    [HideInInspector] public Gene procreateModifier = new Gene();
-    [HideInInspector] public Gene attackModifier = new Gene();
-    [HideInInspector] public Gene minHunger = new Gene();
     public Color[] possibleColors = new Color[3];
     public int attractiveness = 0;
     private RendererFXInterface rendererFXInterface;
 
 
-    private void Start() {
+    private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();
-        
+        speed = new Gene();
+        vitality = new Gene();
+        starvingDamage = new Gene();
+        angryDamage = new Gene();
+        wanderRate = new Gene();
+        smellRadius = new Gene();
+        senseRadius = new Gene();
+        strength = new Gene();
+        intimidationFactor = new Gene();
+        perceptionAccuracy = new Gene();
+        procreateModifier = new Gene();
+        attackModifier = new Gene();
+        minHunger = new Gene();
+
         speed.min = 5f;
         speed.max = 20f;
 
