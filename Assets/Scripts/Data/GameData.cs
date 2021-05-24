@@ -21,7 +21,7 @@ public class GameData : MonoBehaviour
 
     }
 
-    public void setData(int ag, float da) {
+    public void SetData(int ag, float da) {
         agents = ag; days = da;
     }
 
@@ -30,12 +30,12 @@ public class GameData : MonoBehaviour
         daysText.text = days.ToString();
     }
 
-    public int getAgents() {
+    public int GetAgents() {
         agents = createAgents.NumberAgents;
         return agents;
     }
 
-    public float getDays() {
+    public float GetDays() {
         days = daysController.daysCounter;
         return days;
     }
