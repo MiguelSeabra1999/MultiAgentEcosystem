@@ -147,6 +147,7 @@ public class AgentBehaviour : MonoBehaviour
 
     public void Fight(GameObject agentToAttack) {
         string agent1_decision, agent2_decision;
+        if(agentToAttack == null) return;
 
         agent1_decision = agentDeliberation.RunOrAttack(agentToAttack);
         agent2_decision = agentToAttack.GetComponent<AgentDeliberation>().RunOrAttack(gameObject);

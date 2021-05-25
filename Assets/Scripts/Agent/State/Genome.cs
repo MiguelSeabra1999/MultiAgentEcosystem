@@ -20,12 +20,12 @@ public class Genome : MonoBehaviour
     [HideInInspector] public Gene procreateModifier;
     [HideInInspector] public Gene attackModifier;
     [HideInInspector] public Gene minHunger;
-    [HideInInspector] public float mutationProbability = 0.1f;
+    [HideInInspector] public float mutationProbability = 0.02f;
     [HideInInspector] public Color color;
     public Color[] possibleColors = new Color[3];
     public int attractiveness = 0;
     private RendererFXInterface rendererFXInterface;
-    private float totalRadius = 10;
+    private float totalRadius = 50;
     private List<Gene> genes = new List<Gene>();
     private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();

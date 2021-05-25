@@ -5,8 +5,6 @@ using UnityEngine;
 public class Mate : AgentAction
 {
 
-
-    private float procreateDelay = 5f;
     private float bias = 4f;
     public Mate(AgentBehaviour agentBehaviour) : base(agentBehaviour)
     {}

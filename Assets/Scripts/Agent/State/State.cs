@@ -27,6 +27,7 @@ public class State : MonoBehaviour
         feel = GetComponent<Feel>();
         rendererFXInterface = GetComponent<RendererFXInterface>();
         animator = GetComponentInChildren<Animator>();
+        moveActuator = GetComponent<MoveActuator>();
         daysToLive = maxDaysAlive;
         gameplayEvents.passedDayEvent += PassedDayHandler;
     }
@@ -35,6 +36,10 @@ public class State : MonoBehaviour
         hp = genome.vitality.value;
 //        Debug.Log(hp);PassedDayHandler
         blocked = false;
+    }
+    void OnDestroy()
+    {
+        gameplayEvents.passedDayEvent -= PassedDayHandler;
     }
 
     private void FixedUpdate() {
@@ -108,6 +113,7 @@ public class State : MonoBehaviour
 
     public void SetBlock(bool state)
     {
+
         blocked = state;
         if(state)
         {
@@ -118,6 +124,7 @@ public class State : MonoBehaviour
 
     private void PassedDayHandler()
     {
+
         daysToLive--;
         if(daysToLive == 0)
             Destroy(gameObject);

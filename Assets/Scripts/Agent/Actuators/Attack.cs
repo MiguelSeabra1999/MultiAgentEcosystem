@@ -9,7 +9,6 @@ public class Attack : MonoBehaviour
     private Animator animator;
 
     private float attackValue = 100;
-    private float attackDelay = 5f;
 
     void Awake()
     {
