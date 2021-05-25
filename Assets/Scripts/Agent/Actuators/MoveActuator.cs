@@ -77,7 +77,13 @@ public class MoveActuator : MonoBehaviour
         transform.rotation = UnityEngine.Quaternion.Euler(0f, angle, 0f);
     }
 
-
+    private void RunFromAttacker(GameObject attacker)
+    {
+        UnityEngine.Vector3 offset = transform.position - attacker.transform.position;
+        UnityEngine.Vector3 runDir = offset.normalized;
+        UnityEngine.Vector2 runDir2D = new UnityEngine.Vector2(runDir.x,runDir.z);
+        SetMovement(runDir2D);
+    }
     private UnityEngine.Vector2 RandomDirection()
     {
         UnityEngine.Vector2 dir = new UnityEngine.Vector2(Random.Range(-1f,1f),Random.Range(-1f,1f));

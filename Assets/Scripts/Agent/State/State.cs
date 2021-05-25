@@ -15,7 +15,7 @@ public class State : MonoBehaviour
     public float peace = 100;
     public bool blocked = false;
     public int maxDaysAlive = 10;
-    private int daysToLive;
+    [HideInInspector]public int daysToLive;
     private Genome genome;
     private Animator animator;
     private Feel feel;

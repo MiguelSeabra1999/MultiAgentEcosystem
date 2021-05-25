@@ -83,14 +83,14 @@ public class Genome : MonoBehaviour
         perceptionAccuracy.min = 0.05f;
         perceptionAccuracy.max = 1f;
 
-        procreateModifier.min = 0.05f;
-        procreateModifier.max = 1f;
+        procreateModifier.min = 0.5f;
+        procreateModifier.max = 1.5f;
 
-        attackModifier.min = 0.05f;
-        attackModifier.max = 1f;
+        attackModifier.min = 0.5f;
+        attackModifier.max = 1.5f;
 
-        minHunger.min = 50f;
-        minHunger.max = 70f;
+        minHunger.min = 20f;
+        minHunger.max = 60f;
 
         GenomeWithMutations();
 
@@ -99,31 +99,8 @@ public class Genome : MonoBehaviour
     }
 
     public void GenomeWithMutations() {
-        //Speed
-        speed.GeneWithMutations(mutationProbability);
-        //Vitality 
-        vitality.GeneWithMutations(mutationProbability);
-        //AngryDamage
-       // angryDamage.GeneWithMutations(mutationProbability);
-        //StarvingDamage
-        starvingDamage.GeneWithMutations(mutationProbability);
-        //WanderRate
-        wanderRate.GeneWithMutations(mutationProbability);
-        //SenseRadius
-        smellToSenseRatio.GeneWithMutations(mutationProbability);
-        //Strength
-        strength.GeneWithMutations(mutationProbability);
-        //IntimidationFactor
-        intimidationFactor.GeneWithMutations(mutationProbability);
-        //PerceptionAccuracy
-        perceptionAccuracy.GeneWithMutations(mutationProbability);
-        //ProcreateModifier
-        procreateModifier.GeneWithMutations(mutationProbability);
-        //AttackModifier
-        attackModifier.GeneWithMutations(mutationProbability);
-        //MinHunger
-        minHunger.GeneWithMutations(mutationProbability);
-
+        foreach(Gene gene in genes)
+            gene.GeneWithMutations(mutationProbability);
         attractiveness = Random.Range(0, 3);
         color = possibleColors[attractiveness];
     }

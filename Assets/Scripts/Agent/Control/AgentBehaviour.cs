@@ -27,7 +27,8 @@ public class AgentBehaviour : MonoBehaviour
     [HideInInspector] public bool canAttack = true;
     private float timeSinceLastWanderShift;
     private bool firstFrame = true;
-    private float procreateDelay = 4f;
+    private float procreateDelay = 6f;
+    private float dumpedProcreateDelay = 2f;
     private float bias = 4f;
 
     public GameObject agentPrefab;
@@ -50,6 +51,7 @@ public class AgentBehaviour : MonoBehaviour
     }
     void Start()
     {
+        Invoke("ProcreateCooldown", procreateDelay);
         Invoke("ProcreateCooldown", procreateDelay);
     }
 
@@ -125,7 +127,7 @@ public class AgentBehaviour : MonoBehaviour
             BeginBabyRoutine();
             GameObject baby = Instantiate(agentPrefab, new Vector3(transform.position.x + (dir3D.x/2),0,transform.position.z + (dir3D.z/2)), Quaternion.identity);
             baby.GetComponent<Genome>().BrandNewGenome(genome, partner.GetComponent<Genome>());
-            UnityEngine.Debug.Log("Baby");
+//            UnityEngine.Debug.Log("Baby");
             createAgents.NumberAgents++;
 
         state.hunger -= 10;
@@ -134,9 +136,9 @@ public class AgentBehaviour : MonoBehaviour
 
     public void GetDumped()
     {
-        UnityEngine.Debug.Log("dumped");
+       // UnityEngine.Debug.Log("dumped");
         canProcreate = false;
-        Invoke("ProcreateCooldown", procreateDelay); 
+        Invoke("ProcreateCooldown", dumpedProcreateDelay); 
     }
     private void ProcreateCooldown()
     {
@@ -151,7 +153,7 @@ public class AgentBehaviour : MonoBehaviour
 
         agent1_decision = agentDeliberation.RunOrAttack(agentToAttack);
         agent2_decision = agentToAttack.GetComponent<AgentDeliberation>().RunOrAttack(gameObject);
-        UnityEngine.Debug.Log("startingFight");
+        UnityEngine.Debug.Log("startingFight " + state.hunger,gameObject);
         State agentToAttackState = agentToAttack.GetComponent<State>();
         Attack agentToAttackAttack = agentToAttack.GetComponent<Attack>();
         if(agent1_decision == "attack" && agent2_decision == "attack") {
@@ -170,7 +172,9 @@ public class AgentBehaviour : MonoBehaviour
 
             if(Vector3.Distance(agentToAttack.transform.position, transform.position) <= bias)
                 agentToAttackAttack.AttackAgent(gameObject);
+            
 
+            transform.SendMessage("RunFromAttacker",agentToAttack);//implemented on move actuator
             StartCoroutine(QueueUnblock(agentToAttackState));
         }
         else if(agent1_decision == "attack" && agent2_decision == "run") {
@@ -178,7 +182,7 @@ public class AgentBehaviour : MonoBehaviour
 
             if(Vector3.Distance(agentToAttack.transform.position, transform.position) <= bias)
                 attack.AttackAgent(agentToAttack);
-
+            agentToAttack.transform.SendMessage("RunFromAttacker",gameObject);//implemented on move actuator
             StartCoroutine(QueueUnblock(state));
         }
         agentIntentions.Reconsider();
@@ -188,6 +192,7 @@ public class AgentBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         state.SetBlock(false);
+        agentIntentions.Reconsider();
     }
   
     private Vector2 Reflect(Vector2 forwardDir, Vector2 normal)

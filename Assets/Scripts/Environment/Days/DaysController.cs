@@ -27,7 +27,8 @@ public class DaysController : MonoBehaviour
             TimeOfDay += Time.deltaTime;
             if(TimeOfDay >= 24f) {
                 daysCounter++;
-                text.text = "DAY: " + Mathf.Floor(daysCounter);
+                if(text!=null)
+                    text.text = "DAY: " + Mathf.Floor(daysCounter);
                 gameplayEvents.InvokeSaveData();
                 gameplayEvents.InvokePassedDayEvent();
             }
