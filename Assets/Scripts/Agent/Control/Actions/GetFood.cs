@@ -13,7 +13,7 @@ public class GetFood : AgentAction
         Vector3 offset = target.transform.position-agentBehaviour.transform.position;
 
         Vector3 dir3D = offset.normalized;
-        UnityEngine.Debug.Log("going food");
+//        UnityEngine.Debug.Log("going food");
         Vector2 dir2D = new Vector2(dir3D.x,dir3D.z);
         agentBehaviour.moveActuator.SetMovement(dir2D);
     }

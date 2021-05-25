@@ -10,7 +10,7 @@ public class Mate : AgentAction
     {}
     public override void BeginAction()
     {
-        UnityEngine.Debug.Log("going for the pickup");
+//        UnityEngine.Debug.Log("going for the pickup");
     }
 
     
@@ -42,7 +42,7 @@ public class Mate : AgentAction
     }
     public override float Consider()
     {
-        if(target == null || !agentBehaviour.canProcreate || agentBehaviour.state.hunger <= 50)
+        if(target == null || !agentBehaviour.canProcreate || agentBehaviour.state.hunger <= 50 )
             return 0;
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
    

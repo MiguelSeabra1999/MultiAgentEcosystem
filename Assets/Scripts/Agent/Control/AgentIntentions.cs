@@ -29,7 +29,7 @@ public class AgentIntentions : MonoBehaviour
     {
 
         AgentAction bestAction = null;
-        float maximumDesirability = 0;
+        float maximumDesirability = 0.15f;
 //            Debug.Log("considering:");
         foreach(AgentAction agentAction in possibleActions)
         {

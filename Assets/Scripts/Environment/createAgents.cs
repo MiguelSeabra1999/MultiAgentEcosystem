@@ -25,7 +25,7 @@ public class CreateAgents : MonoBehaviour
     }
     private void myFunc()
     {
-        UnityEngine.Debug.Log("agent Died");
+//        UnityEngine.Debug.Log("agent Died");
         NumberAgents--;
     }
 }

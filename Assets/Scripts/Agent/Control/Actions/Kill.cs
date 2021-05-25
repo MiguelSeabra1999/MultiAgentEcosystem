@@ -6,12 +6,17 @@ public class Kill : AgentAction
 {
 
     private float bias = 4f;
+    
     public Kill(AgentBehaviour agentBehaviour) : base(agentBehaviour)
-    {}
+    {
+        agentBehaviour.canAttack = false;
+        agentBehaviour.StartCoroutine(RestoreCanFight());
+
+    }
     public override void BeginAction()
     {
 
-        UnityEngine.Debug.Log("going for the kill");
+//        UnityEngine.Debug.Log("going for the kill");
     }
 
     
@@ -30,7 +35,7 @@ public class Kill : AgentAction
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
         if(distToTarget <= bias)  {//agent together
           //  if(!agentBehaviour.state.blocked) { //going to attack
-                Debug.Log("Fight");
+//                Debug.Log("Fight");
                 agentBehaviour.Fight(target);
                 agentBehaviour.canAttack = false;
                 agentBehaviour.canProcreate = false;
@@ -46,7 +51,7 @@ public class Kill : AgentAction
     {
         yield return new WaitForSeconds(4f);
         agentBehaviour.canAttack = true;
-        agentBehaviour.canProcreate = true;
+       // agentBehaviour.canProcreate = true;
     }
     public override float Consider()
     {
@@ -59,6 +64,6 @@ public class Kill : AgentAction
         float confidence =  agentBehaviour.genome.strength.value / perception;
     
         confidence = Mathf.Clamp(confidence,0f,1f);
-        return ((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.GetSenseRadius())) * confidence * agentBehaviour.genome.attackModifier.value;
+        return ((100-agentBehaviour.state.hunger)/100) *((100-agentBehaviour.state.hunger)/100) * (1-(distToTarget/agentBehaviour.genome.GetSenseRadius())) * confidence * agentBehaviour.genome.attackModifier.value;
     }
 }

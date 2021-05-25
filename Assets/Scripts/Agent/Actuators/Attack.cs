@@ -31,10 +31,10 @@ public class Attack : MonoBehaviour
         if(otherState.hp <= 0) {
             otherState.Die();
             
-            UnityEngine.Debug.Log("Attacked and died");
+            //UnityEngine.Debug.Log("Attacked and died");
         }
         else {
-            UnityEngine.Debug.Log("Attacked");
+          //  UnityEngine.Debug.Log("Attacked");
         }        
     }
 
