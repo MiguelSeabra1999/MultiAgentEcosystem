@@ -460,11 +460,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefab: {fileID: 5151684292951206930, guid: cff04a46a91ff7c48a5b906088ffaecd, type: 3}
-  minX: -10
-  minY: -10
-  maxX: 10
-  maxY: 10
-  spawnChance: 0.02
+  minX: -20
+  minY: -20
+  maxX: 20
+  maxY: 20
+  spawnChance: 0.5
   initialBurst: 20
   spawnChanceFrequency: 0.1
 --- !u!114 &673356472
@@ -485,7 +485,7 @@ MonoBehaviour:
   minY: -15
   maxX: 15
   maxY: 15
-  NumberAgents: 10
+  NumberAgents: 5
 --- !u!114 &673356474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,6 +1136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   daysController: {fileID: 673356474}
   createAgents: {fileID: 673356472}
+  spawnFood: {fileID: 0}
 --- !u!4 &1425482021
 Transform:
   m_ObjectHideFlags: 0

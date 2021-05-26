@@ -153,7 +153,7 @@ public class AgentBehaviour : MonoBehaviour
 
         agent1_decision = agentDeliberation.RunOrAttack(agentToAttack);
         agent2_decision = agentToAttack.GetComponent<AgentDeliberation>().RunOrAttack(gameObject);
-        UnityEngine.Debug.Log("startingFight " + state.hunger,gameObject);
+//        UnityEngine.Debug.Log("startingFight " + state.hunger,gameObject);
         State agentToAttackState = agentToAttack.GetComponent<State>();
         Attack agentToAttackAttack = agentToAttack.GetComponent<Attack>();
         if(agent1_decision == "attack" && agent2_decision == "attack") {
@@ -219,7 +219,7 @@ public class AgentBehaviour : MonoBehaviour
 
     void OnDestroy()
     {
-        gameplayEvents.InvokeAgentDiedEvent();
+        gameplayEvents.InvokeAgentDiedEvent(genome);
     }
     
 }
