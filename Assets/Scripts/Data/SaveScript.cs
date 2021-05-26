@@ -31,14 +31,12 @@ public class SaveScript : MonoBehaviour
     public void SaveData()
     {
 
-        UnityEngine.Debug.Log("Saving data....");
         string save = gameData.GetAgents() + " " + Mathf.Floor(gameData.GetDays()) + " " + gameData.GetFoodCount();
 
         StreamWriter writer = new StreamWriter(savePath, true);
         writer.WriteLine(save);
         writer.Close();
 
-        UnityEngine.Debug.Log("Data Saved");
     }
 
 

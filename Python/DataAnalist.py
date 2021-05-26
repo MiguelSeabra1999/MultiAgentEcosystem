@@ -52,7 +52,6 @@ class Genome:
             standard_deviations_aux[key] = update_sd(self.stats[key], average_stats_aux[key], standard_deviations_aux[key], Genome.count)
             
 
-
 def update_avg(sample, current_average, sample_count):
     return current_average + (sample - current_average)/sample_count
 
@@ -86,7 +85,9 @@ def printGraphWithSd(x, y, x_label, y_label, graph_name, graph_number, sd) :
 
     envPlot.set(xlabel=x_label, ylabel=y_label,
         title=graph_name)
+    
     envPlot.fill_between(x, y_np+np.sqrt(sd_np), y_np-np.sqrt(sd_np), facecolor='blue', alpha=0.5)
+    
     envPlot.grid()
 
     path = "C:/Users/nocas/Documents/MultiAgentEcosystem/Python/Graph{s}.png".format(s=graph_number)
@@ -132,11 +133,23 @@ def printScatterPlot(x, y, x_label, y_label, graph_name, fig_name, xlim_min, yli
     plt.grid()
     pl.show()
     
+###Lifespan
 
+'''f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/lifespanSave.txt", "r") 
 
+lifespanData = f.readlines()
+
+averageLifespan = 0
+
+for i in range(len(lifespanData)):
+    averageLifespan = update_avg(int(lifespanData[i]), averageLifespan, i+1)
+    
+print("Average Lifespan: ", averageLifespan, "days.")
+
+f.close'''
 
 #### ENVIRONMENT
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/gamesave_firstexperiment.txt", "r") 
+f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/gamesave3.txt", "r") 
 
 gamedata = f.readlines()
 
@@ -159,7 +172,7 @@ printGraph(data["day"], data["food"], 'days', 'food', 'Number of food per day', 
 f.close
 
 ### GENOME
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/genomesave_firstexperiment.txt", "r") 
+f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/genomeSave3.txt", "r") 
 
 data_genome = {
         "speed"                 : [],
@@ -264,15 +277,18 @@ for i in range(len(data["day"])):
         data_genome[key].append(copy.copy(data_aux[key]))
         data_aux[key].clear()
 
-for key in data_genome:
-    printGraphWithSd(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key, standard_deviations[key])
-
+#for key in data_genome:
+    #printGraphWithSd(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key, standard_deviations[key])
+    #printGraph(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key)
 
 #procreate modifier and attack modifier
-printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0, 0, 1, 1)
+printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-for i in [100]:#10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
-    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0, 0, 1, 1)
+#for i in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
+#    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
+
+for i in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 398]:
+    printScatterPlot(data_genome["speed"][i-1], data_genome["vitality"][i-1], 'speed', 'vitality', 'speed and vitality comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 5, 5, 20, 20)
 
 
 f.close
