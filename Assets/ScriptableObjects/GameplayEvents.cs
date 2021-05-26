@@ -12,15 +12,21 @@ public class GameplayEvents : ScriptableObject
     [HideInInspector]public event UnityAction passedDayEvent;
     [HideInInspector]public List<string> genomeData = new List<string>();
     private List<List<string>> geneDataByDay = new List<List<string>>();
+    private List<string> obituary = new List<string>();
     private string savePath =  "Data/genomeSave.txt";
+    private string savePath2 =  "Data/obituarySave.txt";
 
     private void OnEnable() {
         genomeData.Clear();
         geneDataByDay.Clear();
-
-
+        obituary.Clear();
 
         using (StreamWriter tw = new StreamWriter(savePath))
+        {
+            tw.Write("");
+            tw.Close();
+        }
+        using (StreamWriter tw = new StreamWriter(savePath2))
         {
             tw.Write("");
             tw.Close();
@@ -29,8 +35,14 @@ public class GameplayEvents : ScriptableObject
     private void OnDisable() {
         
     }
-    public void InvokeAgentDiedEvent()
+    public void InvokeAgentDiedEvent(Genome genome)
     {
+        StreamWriter writer = new StreamWriter(savePath2, true);
+    
+        writer.WriteLine(genome.GetObituary());
+
+        writer.Close();
+
         if(agentDiedEvent!=null)
         {
             agentDiedEvent.Invoke();
@@ -43,8 +55,6 @@ public class GameplayEvents : ScriptableObject
         {
             saveDataEvent.Invoke();
         }
-
-
     }
     public void InvokePassedDayEvent()
     {
@@ -58,14 +68,14 @@ public class GameplayEvents : ScriptableObject
     }
     public void SaveGenomeData()
     {
-
-
         StreamWriter writer = new StreamWriter(savePath, true);
         foreach(string agentGenomeData in genomeData)
         {
             writer.WriteLine(agentGenomeData);
         }
+
         writer.Close();
     }
+
 }
 

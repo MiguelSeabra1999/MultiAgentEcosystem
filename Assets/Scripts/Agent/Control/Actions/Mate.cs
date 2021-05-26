@@ -27,7 +27,7 @@ public class Mate : AgentAction
         agentBehaviour.moveActuator.SetMovement(dir2D);
         float distToTarget = (target.transform.position - agentBehaviour.transform.position).magnitude;
         if(distToTarget <= bias)  {//agent together
-
+//        Debug.Log("proposing");
              if(agentBehaviour.canProcreate && target.GetComponent<AgentDeliberation>().YesToProcreate()) {
                  agentBehaviour.Procreate(target);
              }

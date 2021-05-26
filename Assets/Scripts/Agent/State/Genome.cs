@@ -27,6 +27,8 @@ public class Genome : MonoBehaviour
     private RendererFXInterface rendererFXInterface;
     private float totalRadius = 50;
     private List<Gene> genes = new List<Gene>();
+    private float birthDate;
+    [HideInInspector]public int children = 0;
     private void Awake() {
         rendererFXInterface = GetComponent<RendererFXInterface>();
         gameplayEvents.saveDataEvent += SaveData;
@@ -97,7 +99,9 @@ public class Genome : MonoBehaviour
         rendererFXInterface.SetColor(color);
         
     }
-
+    private void Start() {
+        birthDate = Time.time;
+    }
     public void GenomeWithMutations() {
         foreach(Gene gene in genes)
             gene.GeneWithMutations(mutationProbability);
@@ -133,6 +137,7 @@ public class Genome : MonoBehaviour
 
         attractiveness = Random.Range(0, 3);
         color = possibleColors[attractiveness];
+        children++;
     }
 
 
@@ -182,6 +187,15 @@ public class Genome : MonoBehaviour
             myData += gene.value + " ";
 
         gameplayEvents.genomeData.Add(myData);
+    }
+    public string GetObituary()
+    {
+        string myData = "";
+        myData += (Time.time - birthDate) + " ";
+        myData += children + " ";
+        foreach(Gene gene in genes)
+            myData += gene.value + " ";
+        return myData;
     }
 
 }
