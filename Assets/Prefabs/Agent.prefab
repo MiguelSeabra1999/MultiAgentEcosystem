@@ -159,6 +159,7 @@ MonoBehaviour:
   - {r: 0.9245283, g: 0.3174795, b: 0.81379145, a: 0}
   - {r: 0.8773585, g: 0.80797863, b: 0.21851191, a: 0}
   attractiveness: 0
+  children: 0
 --- !u!114 &7959711662143659309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +179,8 @@ MonoBehaviour:
   hunger: 100
   peace: 100
   blocked: 0
-  maxDaysAlive: 5
+  maxDaysAlive: 10
+  daysToLive: 0
 --- !u!114 &4719063023130372448
 MonoBehaviour:
   m_ObjectHideFlags: 0
