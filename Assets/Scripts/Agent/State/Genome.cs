@@ -109,6 +109,11 @@ public class Genome : MonoBehaviour
         color = possibleColors[attractiveness];
     }
 
+    private void OnDestroy()
+    {
+        gameplayEvents.saveDataEvent -= SaveData;
+    }
+
     public void BrandNewGenome(Genome go_1, Genome go_2) {
         //Speed
         speed.NewGene(go_1.speed, go_2.speed, mutationProbability);
@@ -182,6 +187,7 @@ public class Genome : MonoBehaviour
 
     public void SaveData()
     {
+        //if(gameObject == null) return;
         string myData = "";
         foreach(Gene gene in genes)
             myData += gene.value + " ";
