@@ -16,6 +16,7 @@ class Environment:
         Environment.count += 1
         statsLine = statsLine[:-1]
         self.statsList = statsLine.split(" ")
+        
         self.stats = {
             "day" : int(self.statsList[1]),
             "agents" : int(self.statsList[0]),
@@ -25,6 +26,48 @@ class Environment:
         for key in Environment.average_stats:
             Environment.average_stats[key] = update_avg(self.stats[key], Environment.average_stats[key], Environment.count)
 
+class Obituary:
+    average_stats = {
+            "lifespan"              : 0,
+            "babiesPerAgent"        : 0,
+            "speed"                 : 0,
+            "vitality"              : 0,
+            "starvingDamage"        : 0,
+            "wanderRate"            : 0,
+            "smellToSenseRatio"     : 0,
+            "strength"              : 0,
+            "intimidationFactor"    : 0,
+            "perceptionAccuracy"    : 0,
+            "procreateModifier"     : 0,
+            "attackModifier"        : 0,
+            "minHunger"             : 0
+    }
+    
+    count = 0
+    def __init__(self, statsLine):
+        statsLine = statsLine.replace(",", ".")
+        self.statsList = statsLine.split(" ")
+        if(float(self.statsList[0]) >= 0):
+            Obituary.count += 1
+            
+            self.stats ={
+                "lifespan"              : float(self.statsList[0]),
+                "babiesPerAgent"        : float(self.statsList[1]),
+                "speed"                 : float(self.statsList[2]),
+                "vitality"              : float(self.statsList[3]),
+                "starvingDamage"        : float(self.statsList[4]),
+                "wanderRate"            : float(self.statsList[5]),
+                "smellToSenseRatio"     : float(self.statsList[6]),
+                "strength"              : float(self.statsList[7]),
+                "intimidationFactor"    : float(self.statsList[8]),
+                "perceptionAccuracy"    : float(self.statsList[9]),
+                "procreateModifier"     : float(self.statsList[10]),
+                "attackModifier"        : float(self.statsList[11]),
+                "minHunger"             : float(self.statsList[12])
+            }
+            
+            for key in Obituary.average_stats:
+                Obituary.average_stats[key] = update_avg(self.stats[key], Obituary.average_stats[key], Obituary.count)
 
 class Genome:
     
@@ -33,6 +76,7 @@ class Genome:
         Genome.count += 1
         statsLine = statsLine.replace(",", ".")
         self.statsList = statsLine.split(" ")
+        print(self.statsList)
         self.stats ={
             "speed"                 : float(self.statsList[0]),
             "vitality"              : float(self.statsList[1]),
@@ -132,24 +176,9 @@ def printScatterPlot(x, y, x_label, y_label, graph_name, fig_name, xlim_min, yli
 
     plt.grid()
     pl.show()
-    
-###Lifespan
-
-'''f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/lifespanSave.txt", "r") 
-
-lifespanData = f.readlines()
-
-averageLifespan = 0
-
-for i in range(len(lifespanData)):
-    averageLifespan = update_avg(int(lifespanData[i]), averageLifespan, i+1)
-    
-print("Average Lifespan: ", averageLifespan, "days.")
-
-f.close'''
 
 #### ENVIRONMENT
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/gamesave3.txt", "r") 
+f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/gamesave.txt", "r") 
 
 gamedata = f.readlines()
 
@@ -171,8 +200,24 @@ printGraph(data["day"], data["food"], 'days', 'food', 'Number of food per day', 
 
 f.close
 
+### OBITUARY
+
+f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/obituarySave.txt", "r") 
+
+obituaryData = f.readlines()
+
+for i in range(len(obituaryData)):
+    obituary = Obituary(obituaryData[i])
+    
+print(obituary.count)
+    
+print("Average Lifespan: ", obituary.average_stats["lifespan"] / 24, "days.")
+print("Average Babies per Agent: ", obituary.average_stats["babiesPerAgent"], "days.")
+
+f.close
+
 ### GENOME
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/genomeSave3.txt", "r") 
+f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/genomeSave.txt", "r") 
 
 data_genome = {
         "speed"                 : [],
@@ -276,18 +321,18 @@ for i in range(len(data["day"])):
         Genome.count = 0
         data_genome[key].append(copy.copy(data_aux[key]))
         data_aux[key].clear()
-
-#for key in data_genome:
-    #printGraphWithSd(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key, standard_deviations[key])
+        
+for key in data_genome:
+    printGraphWithSd(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key, standard_deviations[key])
     #printGraph(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key)
 
 #procreate modifier and attack modifier
 printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-#for i in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
-#    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
+for i in [10, 20, 30, 40, 100]:
+    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-for i in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 398]:
+for i in [10, 20, 30, 40, 100]:
     printScatterPlot(data_genome["speed"][i-1], data_genome["vitality"][i-1], 'speed', 'vitality', 'speed and vitality comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 5, 5, 20, 20)
 
 
