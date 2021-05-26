@@ -698,7 +698,7 @@ MonoBehaviour:
   minY: -120
   maxX: 120
   maxY: 120
-  spawnChance: 0.5
+  spawnChance: 0.2
   initialBurst: 50
   spawnChanceFrequency: 0.1
 --- !u!114 &673356472
@@ -719,7 +719,7 @@ MonoBehaviour:
   minY: -120
   maxX: 120
   maxY: 120
-  NumberAgents: 50
+  NumberAgents: 10
 --- !u!114 &673356474
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class AgentBehaviour : MonoBehaviour
     void Start()
     {
         Invoke("ProcreateCooldown", procreateDelay);
-        Invoke("ProcreateCooldown", procreateDelay);
+       // Invoke("ProcreateCooldown", procreateDelay);
     }
 
     private void Update() {

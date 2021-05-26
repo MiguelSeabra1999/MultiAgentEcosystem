@@ -3,6 +3,7 @@ import numpy as np
 import copy
 import math
 
+mypath =  "C:/Users/Asus/Documents/Tecnico/Cadeiras2Sem/ASMA/Project/MultiagentEcosystem/MultiAgentEcosystem"
 
 class Environment:
     average_stats = {
@@ -47,27 +48,27 @@ class Obituary:
     def __init__(self, statsLine):
         statsLine = statsLine.replace(",", ".")
         self.statsList = statsLine.split(" ")
-        if(float(self.statsList[0]) >= 0):
-            Obituary.count += 1
+
+        Obituary.count += 1
+        
+        self.stats ={
+            "lifespan"              : float(self.statsList[0]),
+            "babiesPerAgent"        : float(self.statsList[1]),
+            "speed"                 : float(self.statsList[2]),
+            "vitality"              : float(self.statsList[3]),
+            "starvingDamage"        : float(self.statsList[4]),
+            "wanderRate"            : float(self.statsList[5]),
+            "smellToSenseRatio"     : float(self.statsList[6]),
+            "strength"              : float(self.statsList[7]),
+            "intimidationFactor"    : float(self.statsList[8]),
+            "perceptionAccuracy"    : float(self.statsList[9]),
+            "procreateModifier"     : float(self.statsList[10]),
+            "attackModifier"        : float(self.statsList[11]),
+            "minHunger"             : float(self.statsList[12])
+        }
             
-            self.stats ={
-                "lifespan"              : float(self.statsList[0]),
-                "babiesPerAgent"        : float(self.statsList[1]),
-                "speed"                 : float(self.statsList[2]),
-                "vitality"              : float(self.statsList[3]),
-                "starvingDamage"        : float(self.statsList[4]),
-                "wanderRate"            : float(self.statsList[5]),
-                "smellToSenseRatio"     : float(self.statsList[6]),
-                "strength"              : float(self.statsList[7]),
-                "intimidationFactor"    : float(self.statsList[8]),
-                "perceptionAccuracy"    : float(self.statsList[9]),
-                "procreateModifier"     : float(self.statsList[10]),
-                "attackModifier"        : float(self.statsList[11]),
-                "minHunger"             : float(self.statsList[12])
-            }
-            
-            for key in Obituary.average_stats:
-                Obituary.average_stats[key] = update_avg(self.stats[key], Obituary.average_stats[key], Obituary.count)
+        for key in Obituary.average_stats:
+            Obituary.average_stats[key] = update_avg(self.stats[key], Obituary.average_stats[key], Obituary.count)
 
 class Genome:
     
@@ -113,7 +114,7 @@ def printGraph(x, y, x_label, y_label, graph_name, graph_number) :
 
     envPlot.grid()
 
-    path = "C:/Users/nocas/Documents/MultiAgentEcosystem/Python/Graph{s}.png".format(s=graph_number)
+    path = mypath + "/Python/Graph{s}.png".format(s=graph_number)
 
     fig.savefig(path) 
 
@@ -134,7 +135,7 @@ def printGraphWithSd(x, y, x_label, y_label, graph_name, graph_number, sd) :
     
     envPlot.grid()
 
-    path = "C:/Users/nocas/Documents/MultiAgentEcosystem/Python/Graph{s}.png".format(s=graph_number)
+    path = mypath +  "/Python/Graph{s}.png".format(s=graph_number)
 
     fig.savefig(path) 
 
@@ -153,7 +154,7 @@ def printBarGraph(x, y, x_label, y_label, graph_name, graph_number) :
     envPlot.set_xticklabels(x)
     envPlot.legend()
 
-    path = "C:/Users/nocas/Documents/MultiAgentEcosystem/Python/Graph{s}.png".format(s=graph_number)
+    path = mypath  + "/Python/Graph{s}.png".format(s=graph_number)
 
     fig.savefig(path) 
 
@@ -170,7 +171,7 @@ def printScatterPlot(x, y, x_label, y_label, graph_name, fig_name, xlim_min, yli
         title=graph_name)
     plt.grid()
 
-    path = "C:/Users/nocas/Documents/MultiAgentEcosystem/Python/{s}.png".format(s=fig_name)
+    path = mypath + "/Data/{s}.png".format(s=fig_name)
 
     fig.savefig(path) 
 
@@ -178,7 +179,7 @@ def printScatterPlot(x, y, x_label, y_label, graph_name, fig_name, xlim_min, yli
     pl.show()
 
 #### ENVIRONMENT
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/gamesave.txt", "r") 
+f = open( mypath + "/Data/gamesave.txt", "r") 
 
 gamedata = f.readlines()
 
@@ -202,13 +203,29 @@ f.close
 
 ### OBITUARY
 
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/obituarySave.txt", "r") 
+f = open( mypath + "/Data/obituarySave.txt", "r") 
 
 obituaryData = f.readlines()
-
+obituaries = []
 for i in range(len(obituaryData)):
-    obituary = Obituary(obituaryData[i])
-    
+    if(obituaryData[i][0] != '-'):
+        obituary = Obituary(obituaryData[i])
+        obituaries.append(obituary)
+
+for key in ["speed","vitality","starvingDamage","wanderRate","smellToSenseRatio" ,"strength","intimidationFactor","perceptionAccuracy","procreateModifier" ,"attackModifier","minHunger"]:
+    x = []
+    y = []
+    for ob in obituaries:
+        x.append(ob.stats["lifespan"]/24.0)
+        y.append(ob.stats[key])
+    printScatterPlot(x,y,"lifespan",key,key + " by lifespan",key + " by lifespan", min(x), min(y), max(x),max(y))
+for key in ["speed","vitality","starvingDamage","wanderRate","smellToSenseRatio" ,"strength","intimidationFactor","perceptionAccuracy","procreateModifier" ,"attackModifier","minHunger"]:
+    x = []
+    y = []
+    for ob in obituaries:
+        x.append(ob.stats["babiesPerAgent"])
+        y.append(ob.stats[key])
+    printScatterPlot(x,y,"children",key,key + " by children",key + " by children", min(x), min(y), max(x),max(y))
 print(obituary.count)
     
 print("Average Lifespan: ", obituary.average_stats["lifespan"] / 24, "days.")
@@ -217,7 +234,7 @@ print("Average Babies per Agent: ", obituary.average_stats["babiesPerAgent"], "d
 f.close
 
 ### GENOME
-f = open("C:/Users/nocas/Documents/MultiAgentEcosystem/Data/small/genomeSave.txt", "r") 
+f = open( mypath + "/Data/genomeSave.txt", "r") 
 
 data_genome = {
         "speed"                 : [],
@@ -305,6 +322,7 @@ standard_deviations_aux = {
 genomeList = []
 
 
+
 for i in range(len(data["day"])):        
     for ag in range(len(data["agents"])):
         genome = Genome(f.readline())
@@ -329,10 +347,10 @@ for key in data_genome:
 #procreate modifier and attack modifier
 printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-for i in [10, 20, 30, 40, 100]:
+for i in [10, 20, 30, 40, 99]:
     printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-for i in [10, 20, 30, 40, 100]:
+for i in [10, 20, 30, 40, 99]:
     printScatterPlot(data_genome["speed"][i-1], data_genome["vitality"][i-1], 'speed', 'vitality', 'speed and vitality comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 5, 5, 20, 20)
 
 
