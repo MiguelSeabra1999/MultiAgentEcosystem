@@ -698,7 +698,7 @@ MonoBehaviour:
   minY: -120
   maxX: 120
   maxY: 120
-  spawnChance: 0.2
+  spawnChance: 1
   initialBurst: 50
   spawnChanceFrequency: 0.1
 --- !u!114 &673356472

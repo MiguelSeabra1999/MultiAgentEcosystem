@@ -77,7 +77,7 @@ class Genome:
         Genome.count += 1
         statsLine = statsLine.replace(",", ".")
         self.statsList = statsLine.split(" ")
-        print(self.statsList)
+      #  print(self.statsList)
         self.stats ={
             "speed"                 : float(self.statsList[0]),
             "vitality"              : float(self.statsList[1]),
@@ -218,14 +218,14 @@ for key in ["speed","vitality","starvingDamage","wanderRate","smellToSenseRatio"
     for ob in obituaries:
         x.append(ob.stats["lifespan"]/24.0)
         y.append(ob.stats[key])
-    printScatterPlot(x,y,"lifespan",key,key + " by lifespan",key + " by lifespan", min(x), min(y), max(x),max(y))
+   # printScatterPlot(x,y,"lifespan",key,key + " by lifespan",key + " by lifespan", min(x), min(y), max(x),max(y))
 for key in ["speed","vitality","starvingDamage","wanderRate","smellToSenseRatio" ,"strength","intimidationFactor","perceptionAccuracy","procreateModifier" ,"attackModifier","minHunger"]:
     x = []
     y = []
     for ob in obituaries:
         x.append(ob.stats["babiesPerAgent"])
         y.append(ob.stats[key])
-    printScatterPlot(x,y,"children",key,key + " by children",key + " by children", min(x), min(y), max(x),max(y))
+  #  printScatterPlot(x,y,"children",key,key + " by children",key + " by children", min(x), min(y), max(x),max(y))
 print(obituary.count)
     
 print("Average Lifespan: ", obituary.average_stats["lifespan"] / 24, "days.")
@@ -324,8 +324,11 @@ genomeList = []
 
 
 for i in range(len(data["day"])):        
-    for ag in range(len(data["agents"])):
-        genome = Genome(f.readline())
+    for ag in range(data["agents"][i]):
+        s = f.readline()
+        if len(s) < 2:
+            continue
+        genome = Genome(s)
         genomeList.append(genome)
         
         for key in data_aux:
@@ -345,13 +348,13 @@ for key in data_genome:
     #printGraph(data["day"], average_stats[key], 'days', 'average {s}'.format(s=key), 'Average {s} per day'.format(s=key), key)
 
 #procreate modifier and attack modifier
-printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
+#printScatterPlot(data_genome["procreateModifier"][0], data_genome["attackModifier"][0], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=1), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
 
-for i in [10, 20, 30, 40, 99]:
-    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
-
-for i in [10, 20, 30, 40, 99]:
-    printScatterPlot(data_genome["speed"][i-1], data_genome["vitality"][i-1], 'speed', 'vitality', 'speed and vitality comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 5, 5, 20, 20)
+#for i in [10, 20, 30, 40, 99]:
+#    printScatterPlot(data_genome["procreateModifier"][i-1], data_genome["attackModifier"][i-1], 'Procreate Modifier', 'Attack Modifier', 'procreate modifier and attack modifier comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 0.5, 0.5, 1.5, 1.5)
+#
+#for i in [10, 20, 30, 40, 99]:
+#    printScatterPlot(data_genome["speed"][i-1], data_genome["vitality"][i-1], 'speed', 'vitality', 'speed and vitality comparision (Day {s})'.format(s=i), 'proc_att_{s}'.format(s=i), 5, 5, 20, 20)
 
 
 f.close

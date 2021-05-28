@@ -20,7 +20,7 @@ public class Genome : MonoBehaviour
     [HideInInspector] public Gene procreateModifier;
     [HideInInspector] public Gene attackModifier;
     [HideInInspector] public Gene minHunger;
-    [HideInInspector] public float mutationProbability = 0.02f;
+    [HideInInspector] public float mutationProbability = 0.1f;
     [HideInInspector] public Color color;
     public Color[] possibleColors = new Color[3];
     public int attractiveness = 0;

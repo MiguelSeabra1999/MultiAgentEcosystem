@@ -14,7 +14,7 @@ public class DaysController : MonoBehaviour
     [SerializeField, Range(0, 24)] private float TimeOfDay;
 
    void Awake() {
-       
+       //Time.timeScale = 5;
    }
        private void Update()
     {
