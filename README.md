@@ -20,3 +20,4 @@ The code that we wrote to build the system can be found in the folder Scripts.
 ## Data analysis using python
 The code that we used for the data analyses can be fould in the folder Python.
 
+[![Video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/5bRdXqgzbNQ)
