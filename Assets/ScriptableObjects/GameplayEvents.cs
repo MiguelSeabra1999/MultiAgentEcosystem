@@ -17,11 +17,9 @@ public class GameplayEvents : ScriptableObject
     private string savePath2 =  "Data/obituarySave.txt";
 
     private void OnEnable() {
-        genomeData.Clear();
-        geneDataByDay.Clear();
-        obituary.Clear();
+         Reset();
 
-        using (StreamWriter tw = new StreamWriter(savePath))
+       /* using (StreamWriter tw = new StreamWriter(savePath))
         {
             tw.Write("");
             tw.Close();
@@ -30,18 +28,27 @@ public class GameplayEvents : ScriptableObject
         {
             tw.Write("");
             tw.Close();
-        }
+        }*/
     }
     private void OnDisable() {
-        
+        Reset();
+    }
+    private void Reset()
+    {
+        genomeData.Clear();
+        geneDataByDay.Clear();
+        obituary.Clear();
+        agentDiedEvent = null;
+        saveDataEvent = null;
+        passedDayEvent = null;
     }
     public void InvokeAgentDiedEvent(Genome genome)
     {
-        StreamWriter writer = new StreamWriter(savePath2, true);
+       /* StreamWriter writer = new StreamWriter(savePath2, true);
     
         writer.WriteLine(genome.GetObituary());
 
-        writer.Close();
+        writer.Close();*/
 
         if(agentDiedEvent!=null)
         {
@@ -68,13 +75,13 @@ public class GameplayEvents : ScriptableObject
     }
     public void SaveGenomeData()
     {
-        StreamWriter writer = new StreamWriter(savePath, true);
-        foreach(string agentGenomeData in genomeData)
+      //  StreamWriter writer = new StreamWriter(savePath, true);
+     /*   foreach(string agentGenomeData in genomeData)
         {
             writer.WriteLine(agentGenomeData);
         }
 
-        writer.Close();
+        writer.Close();*/
     }
 
 }

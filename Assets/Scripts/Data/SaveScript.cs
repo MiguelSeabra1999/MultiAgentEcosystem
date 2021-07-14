@@ -18,11 +18,11 @@ public class SaveScript : MonoBehaviour
         savePath =  "Data/gamesave.txt";
         UnityEngine.Debug.Log(savePath);
 
-        using (StreamWriter tw = new StreamWriter(savePath))
+     /*   using (StreamWriter tw = new StreamWriter(savePath))
         {
             tw.Write("Agents    days    Food\n");
             tw.Close();
-        }
+        }*/
 
         //GetComponent<DaysController>().gameplayEvents;
         gameplayEvents.saveDataEvent += SaveData;
@@ -31,11 +31,11 @@ public class SaveScript : MonoBehaviour
     public void SaveData()
     {
 
-        string save = gameData.GetAgents() + " " + Mathf.Floor(gameData.GetDays()) + " " + gameData.GetFoodCount();
+      /*  string save = gameData.GetAgents() + " " + Mathf.Floor(gameData.GetDays()) + " " + gameData.GetFoodCount();
 
         StreamWriter writer = new StreamWriter(savePath, true);
         writer.WriteLine(save);
-        writer.Close();
+        writer.Close();*/
 
     }
 
