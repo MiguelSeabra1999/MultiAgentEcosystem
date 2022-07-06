@@ -12,6 +12,7 @@ We implemented our project in Unity 2020.2.4f1.
 
 ## Executable
 We provide two executables in two different environments.
+You can downloaded them with the following link: https://drive.google.com/file/d/1kROcj0Z_7bwC88MHZpPGIovr3F8VoO-y/view?usp=sharing
 
 ## Code
 Its possible to open the project using Unity and change the system settings.
